@@ -36,7 +36,7 @@
             <div data-name="roadshow2" title="Roadshow Follow-up" data-layout-styles="background-color: rgb(255, 255, 255) !important;" data-img="/mass_mailing_themes/static/src/img/theme_imgs/roadshow_followup_thumb" data-images-info='{"logo": {"format": "png"}, "all": {"module": "mass_mailing_themes"}}'>
                 <t t-call="mass_mailing_themes.theme_roadshow2_template"/>
             </div>
-            <div data-name="pronyr" title="Pronyr Emails" data-layout-styles="background-color: rgb(255, 255, 255) !important;" data-img="/mass_mailing_themes/static/src/img/theme_imgs/empty_thumb" data-images-info='{"logo": {"format": "png"}, "all": {"module": "mass_mailing_themes"}}'>
+            <div data-name="pronyr" title="Pronyr Emails" data-layout-styles="background-color: rgb(255, 255, 255) !important;" data-img="/mass_mailing_themes/static/src/img/theme_imgs/pronyr_thumb" data-images-info='{"logo": {"format": "png"}, "all": {"module": "mass_mailing_themes"}}'>
                 <t t-call="mass_mailing_themes.theme_pronyr_template"/>
             </div>
         </xpath>
@@ -1499,11 +1499,7 @@
 
     <!-- Pronyr Emails -->
     <template id="theme_pronyr_template">
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&amp;display=swap" rel="stylesheet"/>
         <style id="design-element">
-            * :not(.fa) {
-                font-family: 'Poppins', sans-serif !important;
-            }
             * {
                 line-height: 1.3;
             }
