@@ -353,9 +353,8 @@ class HolidaysRequest(models.Model):
 
         if not is_officer:
             domain = expression.AND([domain, [('user_id', '=', self.env.user.id)]])
-
-        leaves = self.sudo().search(domain)
-        return [('id', 'in', leaves.ids)]
+        query = self.sudo()._search(domain)
+        return [('id', 'inselect', query.select())]
 
     @api.depends('holiday_status_id')
     def _compute_state(self):
@@ -997,7 +996,7 @@ Attempting to double-book your time off won't magically make your vacation 2x be
             if 'date_to' in values:
                 values['request_date_to'] = values['date_to']
         result = super(HolidaysRequest, self).write(values)
-        if any(field in values for field in ['request_date_from', 'date_from', 'request_date_from', 'date_to', 'holiday_status_id', 'employee_id']):
+        if any(field in values for field in ['request_date_from', 'date_from', 'request_date_from', 'date_to', 'holiday_status_id', 'employee_id', 'state']):
             self._check_validity()
         if not self.env.context.get('leave_fast_create'):
             for holiday in self:
@@ -1506,7 +1505,7 @@ Attempting to double-book your time off won't magically make your vacation 2x be
                     if holiday.employee_id != current_employee:
                         raise UserError(_('Only a Time Off Manager can reset other people leaves.'))
                 else:
-                    if val_type == 'no_validation' and current_employee == holiday.employee_id:
+                    if val_type == 'no_validation' and current_employee == holiday.employee_id and (is_officer or is_manager):
                         continue
                     # use ir.rule based first access check: department, members, ... (see security.xml)
                     holiday.check_access_rule('write')
