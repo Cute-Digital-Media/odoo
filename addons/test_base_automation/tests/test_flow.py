@@ -6,7 +6,7 @@ import sys
 
 from odoo.tools import mute_logger
 from odoo.addons.base.tests.common import TransactionCaseWithUserDemo
-from odoo.tests import common, tagged
+from odoo.tests import Form, common, tagged
 from odoo.exceptions import AccessError, ValidationError
 from odoo import Command
 
@@ -34,6 +34,7 @@ def create_automation(self, **kwargs):
             for action in actions_data
         ]
     )
+    action_ids.flush_recordset()
     automation_id.write({'action_server_ids': [Command.set(action_ids.ids)]})
     self.addCleanup(automation_id.unlink)
     return automation_id
@@ -909,6 +910,23 @@ if env.context.get('old_values', None):  # on write
         record_count = self.env[model.model].search_count([('user_id', '=', 'Test _rec_name Automation')])
         self.assertEqual(record_count, 1, "Only one record should have been created")
 
+    def test_140_copy_should_copy_actions(self):
+        """ Copying an automation should copy its actions. """
+        automation = create_automation(
+            self,
+            model_id=self.lead_model.id,
+            trigger='on_change',
+            _actions={'state': 'code', 'code': "record.write({'name': record.name + '!'})"},
+        )
+        action_ids = automation.action_server_ids
+
+        copy_automation = automation.copy()
+        copy_action_ids = copy_automation.action_server_ids
+        # Same number of actions but id should be different
+        self.assertEqual(len(action_ids), 1)
+        self.assertEqual(len(copy_action_ids), len(action_ids))
+        self.assertNotEqual(copy_action_ids, action_ids)
+
 
 @common.tagged('post_install', '-at_install')
 class TestCompute(common.TransactionCase):
@@ -1130,6 +1148,18 @@ class TestCompute(common.TransactionCase):
         # check that the automation has been run once
         partner_count = self.env['res.partner'].search_count([('name', '=', 'Test Partner Automation')])
         self.assertEqual(partner_count, 1, "Only one partner should have been created")
+
+    def test_00_form_save_update_related_model_id(self):
+        with Form(self.env['ir.actions.server'], view="base.view_server_action_form") as f:
+            f.name = "Test Action"
+            f.model_id = self.env["ir.model"]._get("res.partner")
+            f.state = "object_write"
+            f.update_path = "user_id"
+            f.evaluation_type = "value"
+            f.resource_ref = "res.users,2"
+
+        res_users_model = self.env["ir.model"]._get("res.users")
+        self.assertEqual(f.update_related_model_id, res_users_model)
 
 
 @common.tagged("post_install", "-at_install")

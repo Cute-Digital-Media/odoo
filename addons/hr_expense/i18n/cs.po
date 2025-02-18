@@ -4,20 +4,21 @@
 # 
 # Translators:
 # Tomáš Píšek, 2023
-# Aleš Fiala <f.ales1@seznam.cz>, 2023
 # Ivana Bartonkova, 2024
 # Vojtech Smolka, 2024
 # Katerina Horylova, 2024
 # Jakub Smolka, 2024
 # Wil Odoo, 2024
+# Tereza Mokrá, 2024
+# Aleš Fiala <f.ales1@seznam.cz>, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-13 10:26+0000\n"
+"POT-Creation-Date: 2025-02-10 10:33+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
-"Last-Translator: Wil Odoo, 2024\n"
+"Last-Translator: Aleš Fiala <f.ales1@seznam.cz>, 2025\n"
 "Language-Team: Czech (https://app.transifex.com/odoo/teams/41243/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -50,7 +51,7 @@ msgstr ""
 #: code:addons/hr_expense/models/hr_expense.py:0
 #, python-format
 msgid "%(date_from)s - %(date_to)s"
-msgstr ""
+msgstr "%(date_from)s - %(date_to)s"
 
 #. module: hr_expense
 #. odoo-python
@@ -130,7 +131,7 @@ msgstr "<span>@</span>"
 #. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.report_expense_sheet
 msgid "<span>Date:</span>"
-msgstr ""
+msgstr "<span>Datum:</span>"
 
 #. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.report_expense_sheet
@@ -389,7 +390,7 @@ msgstr "Přílohy"
 #. module: hr_expense
 #: model:ir.model.fields,field_description:hr_expense.field_hr_expense_sheet__attachment_ids
 msgid "Attachments of expenses"
-msgstr ""
+msgstr "Přílohy výdajů"
 
 #. module: hr_expense
 #: model:ir.model,name:hr_expense.model_hr_employee_base
@@ -1026,7 +1027,7 @@ msgstr ""
 #. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.report_expense_sheet
 msgid "Flight Ticket"
-msgstr ""
+msgstr "Letenka"
 
 #. module: hr_expense
 #: model:ir.model.fields,field_description:hr_expense.field_hr_expense__message_follower_ids
@@ -1106,6 +1107,11 @@ msgstr "Má zprávu"
 #: model_terms:product.template,description:hr_expense.expense_product_travel_accommodation_product_template
 msgid "Hotel, plane ticket, taxi, etc."
 msgstr "Hotel, letenka, taxi atd."
+
+#. module: hr_expense
+#: model:ir.model.fields,field_description:hr_expense.field_res_config_settings__hr_expense_alias_domain_id
+msgid "Hr Expense Alias Domain"
+msgstr ""
 
 #. module: hr_expense
 #: model:ir.model.fields,field_description:hr_expense.field_hr_expense__id
@@ -1400,7 +1406,7 @@ msgstr "Název"
 #: code:addons/hr_expense/models/hr_expense.py:0
 #, python-format
 msgid "New Expense Report, paid by %(paid_by)s"
-msgstr ""
+msgstr "Nový výkaz výdaje, zaplacen od %(paid_by)s"
 
 #. module: hr_expense
 #. odoo-python
@@ -1522,7 +1528,7 @@ msgstr "Počet zpráv s chybou při doručení"
 #: code:addons/hr_expense/static/src/components/expense_dashboard.xml:0
 #, python-format
 msgid "Numbers computed from your personal expenses."
-msgstr ""
+msgstr "Čísla vypočítaná z vašich osobních výdajů."
 
 #. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.hr_expense_template_register_no_user
@@ -1616,7 +1622,7 @@ msgstr "Platba vytvořena pro: %s"
 #. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.res_config_settings_view_form
 msgid "Payment method allowed for expenses paid by company."
-msgstr ""
+msgstr "Způsob platby povolený pro výdaje hrazené společností."
 
 #. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.res_config_settings_view_form
@@ -1627,7 +1633,7 @@ msgstr "Platební metody"
 #: model:ir.model.fields,field_description:hr_expense.field_res_company__company_expense_allowed_payment_method_line_ids
 #: model:ir.model.fields,field_description:hr_expense.field_res_config_settings__company_expense_allowed_payment_method_line_ids
 msgid "Payment methods available for expenses paid by company"
-msgstr ""
+msgstr " Dostupné způsoby platby za výdaje hrazené společností"
 
 #. module: hr_expense
 #: model:ir.model,name:hr_expense.model_account_payment
@@ -1638,6 +1644,14 @@ msgstr "Platby"
 #: model_terms:product.template,description:hr_expense.expense_product_communication_product_template
 msgid "Phone bills, postage, etc."
 msgstr "Účty za telefon, poštovné atd."
+
+#. module: hr_expense
+#. odoo-python
+#: code:addons/hr_expense/models/hr_expense_sheet.py:0
+#, python-format
+msgid ""
+"Please specify an expense journal in order to generate accounting entries."
+msgstr "Chcete-li generovat účetní záznamy, zadejte deník výdajů."
 
 #. module: hr_expense
 #. odoo-javascript
@@ -1932,13 +1946,6 @@ msgstr ""
 "vytvoří výdaje."
 
 #. module: hr_expense
-#. odoo-python
-#: code:addons/hr_expense/models/hr_expense_sheet.py:0
-#, python-format
-msgid "Specify expense journal to generate accounting entries."
-msgstr "Pro generování účetních záznamů zadejte deník výdajů."
-
-#. module: hr_expense
 #: model:ir.model.fields,help:hr_expense.field_product_product__can_be_expensed
 #: model:ir.model.fields,help:hr_expense.field_product_template__can_be_expensed
 msgid "Specify whether the product can be selected in an expense."
@@ -1965,7 +1972,7 @@ msgstr "Možné rozdělení"
 #. module: hr_expense
 #: model:ir.model.fields,field_description:hr_expense.field_product_product__standard_price_update_warning
 msgid "Standard Price Update Warning"
-msgstr ""
+msgstr "Varování na aktualizaci standardní ceny"
 
 #. module: hr_expense
 #: model:ir.model.fields,field_description:hr_expense.field_hr_expense__state
@@ -2117,7 +2124,7 @@ msgstr "Deník musí být nastaven na zaúčtované výdaje"
 #. module: hr_expense
 #: model:ir.model.fields,help:hr_expense.field_hr_expense_sheet__employee_journal_id
 msgid "The journal used when the expense is paid by employee."
-msgstr ""
+msgstr "Deník používaný při úhradě výdaje zaměstnancem."
 
 #. module: hr_expense
 #: model:ir.model.fields,help:hr_expense.field_hr_expense_sheet__payment_method_line_id
@@ -2154,6 +2161,8 @@ msgid ""
 "category cost will change expense amounts. Make sure it is what you want to "
 "do."
 msgstr ""
+"S touto kategorií souvisí nepředložené výdaje. Aktualizace ceny kategorie "
+"změní výši nákladů. Ujistěte se, že je to to, co chcete dělat."
 
 #. module: hr_expense
 #. odoo-javascript
@@ -2493,6 +2502,23 @@ msgstr "Nemůžete vykazovat výdaje bez částky!"
 #, python-format
 msgid "You cannot report twice the same line!"
 msgstr "Nelze nahlásit dvakrát stejný řádek.."
+
+#. module: hr_expense
+#. odoo-python
+#: code:addons/hr_expense/models/hr_expense_sheet.py:0
+#, python-format
+msgid ""
+"You don't have the rights to bypass the validation process of this expense "
+"report."
+msgstr "Nemáte oprávnění obejít proces ověřování tohoto výkazu výdajů."
+
+#. module: hr_expense
+#. odoo-python
+#: code:addons/hr_expense/models/hr_expense.py:0
+#, python-format
+msgid ""
+"You don't have the rights to bypass the validation process of this expense."
+msgstr "Nemáte oprávnění obejít proces ověřování těchto výdajů."
 
 #. module: hr_expense
 #. odoo-python

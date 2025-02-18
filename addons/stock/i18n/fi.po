@@ -35,6 +35,7 @@
 # Jolien De Paepe, 2024
 # Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2024
 # Tuomo Aura <tuomo.aura@web-veistamo.fi>, 2024
+# Jessica Jakara, 2024
 # Ossi Mantylahti <ossi.mantylahti@obs-solutions.fi>, 2024
 # 
 msgid ""
@@ -417,11 +418,6 @@ msgstr "4 x 7 hinnalla"
 #: model_terms:ir.ui.view,arch_db:stock.report_package_barcode
 msgid "54326786758"
 msgstr "54326786758"
-
-#. module: stock
-#: model_terms:ir.ui.view,arch_db:stock.report_inventory
-msgid "98"
-msgstr "98"
 
 #. module: stock
 #. odoo-python
@@ -1656,6 +1652,17 @@ msgstr "Linkitetty siirto on olemassa"
 #: model:ir.model,name:stock.model_stock_change_product_qty
 msgid "Change Product Quantity"
 msgstr "Muuta tuotteen määrää"
+
+#. module: stock
+#. odoo-python
+#: code:addons/stock/models/stock_move_line.py:0
+#, python-format
+msgid ""
+"Changing the Lot/Serial number for move lines with different products is not"
+" allowed."
+msgstr ""
+"Erä-/sarjanumeron muuttaminen eri tuotteita sisältävien siirtorivien osalta "
+"ei ole sallittua."
 
 #. module: stock
 #. odoo-python
@@ -4039,13 +4046,6 @@ msgstr "Jos sitä ei ole valittu, voit piilottaa säännön poistamatta sitä."
 #: model:ir.model.fields,field_description:stock.field_stock_backorder_confirmation_line__backorder_confirmation_id
 msgid "Immediate Transfer"
 msgstr "Välitön siirto"
-
-#. module: stock
-#. odoo-python
-#: code:addons/stock/models/stock_quant.py:0
-#, python-format
-msgid "Import"
-msgstr "Tuo"
 
 #. module: stock
 #. odoo-javascript
@@ -6451,11 +6451,9 @@ msgstr "Läsnäolo riippuu operaation tyypistä."
 #: code:addons/stock/models/stock_quant.py:0
 #, python-format
 msgid ""
-"Press the CREATE button to define quantity for each product in your stock or"
-" import them from a spreadsheet throughout Favorites"
+"Press the \"New\" button to define the quantity for a product in your stock "
+"or import quantities from a spreadsheet via the Actions menu"
 msgstr ""
-"Paina LUO painiketta määrittääksesi kunkin varastossa olevan tuotteen määrän"
-" tai tuoda ne taulukkolaskentaohjelmasta koko Suosikit"
 
 #. module: stock
 #. odoo-javascript
@@ -7891,7 +7889,7 @@ msgstr "SSCC:"
 #. module: stock
 #: model_terms:res.company,invoice_terms_html:stock.res_company_1
 msgid "STANDARD TERMS AND CONDITIONS OF SALE"
-msgstr "VAKIOMUOTOISET MYYNTIEHDOT"
+msgstr "YLEISET MYYNTIEHDOT"
 
 #. module: stock
 #. odoo-javascript
@@ -8894,6 +8892,13 @@ msgstr ""
 #. odoo-python
 #: code:addons/stock/models/stock_quant.py:0
 #, python-format
+msgid "The Lot/Serial number (%s) is linked to another product."
+msgstr "Erä- tai sarjanumero (%s) liittyy toiseen tuotteeseen."
+
+#. module: stock
+#. odoo-python
+#: code:addons/stock/models/stock_quant.py:0
+#, python-format
 msgid ""
 "The Serial Number (%s) is already used in these location(s): %s.\n"
 "\n"
@@ -8923,9 +8928,10 @@ msgid ""
 "order to be valid, any derogation must be expressly agreed to in advance in "
 "writing."
 msgstr ""
-"Asiakas luopuu nimenomaisesti omista vakioehdoistaan, vaikka ne olisi "
-"laadittu näiden vakiomyyntiehtojen jälkeen. Jotta poikkeukset olisivat "
-"päteviä, niistä on sovittava etukäteen kirjallisesti ja nimenomaisesti."
+"Asiakas luopuu nimenomaisesti omista yleisistä sopimusehdoistaan, vaikka ne "
+"olisi laadittu näiden yleisten myyntiehtojen jälkeen. Jotta poikkeukset "
+"olisivat päteviä, niistä on sovittava etukäteen kirjallisesti ja "
+"nimenomaisesti."
 
 #. module: stock
 #. odoo-python
@@ -10832,6 +10838,13 @@ msgid ""
 msgstr ""
 "Et voi pakata eri siirtojen määriä suoraan samaan pakettiin tämän näkymän "
 "kautta. Kokeile lisätä ne erän poimintaan ja pakkaa se siellä."
+
+#. module: stock
+#. odoo-python
+#: code:addons/stock/models/stock_quant.py:0
+#, python-format
+msgid "You cannot duplicate stock quants."
+msgstr "Varaston määrän asetuksen kirjauksia (quants) ei voi monistaa."
 
 #. module: stock
 #. odoo-python

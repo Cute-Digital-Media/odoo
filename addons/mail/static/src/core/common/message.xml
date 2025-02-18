@@ -45,7 +45,7 @@
                                 className="'ms-1'"
                                 message="props.message"
                                 thread="props.thread"/>
-                            <small t-if="!isOriginThread and !message.is_transient" t-on-click.prevent="openRecord" class="ms-1 text-500">
+                            <small t-if="isPersistentMessageFromAnotherThread" t-on-click.prevent="openRecord" class="ms-1 text-500">
                                 <t t-if="message.model !== 'discuss.channel'">
                                     on <a t-att-href="message.resUrl"><t t-esc="message.originThread?.displayName"/></a>
                                 </t>
@@ -53,7 +53,7 @@
                                     (from <a t-att-href="message.resUrl"><t t-esc="message.originThread?.prefix"/><t t-esc="message.originThread?.displayName"/></a>)
                                 </t>
                             </small>
-                            <div t-if="props.message.scheduledDate" t-att-class="{ 'ms-2': props.isInChatWindow and isAlignedRight }" t-att-title="messageService.scheduledDateSimple(props.message)">
+                            <div t-if="props.message.scheduledDate" t-att-class="{ 'ms-2': (props.isInChatWindow and isAlignedRight) or (isPersistentMessageFromAnotherThread) }" t-att-title="messageService.scheduledDateSimple(props.message)">
                                 <span class="text-600 cursor-pointer">
                                     <i class="fa fa-calendar-o"/>
                                 </span>
@@ -155,8 +155,11 @@
                 <t t-set-slot="default">
                     <t t-foreach="messageActions.actions.slice(quickActionCount)" t-as="action" t-key="action.id">
                         <DropdownItem class="'px-2 d-flex align-items-center rounded-0'" title="action.title" onSelected="action.onClick">
-                            <i class="fa fa-lg fa-fw pe-2" t-att-class="action.icon"/>
-                            <t t-esc="action.title"/>
+                            <t t-if="action.callComponent" t-component="action.callComponent" t-props="action.props"/>
+                            <t t-else="">
+                                <i class="fa fa-lg fa-fw pe-2" t-att-class="action.icon"/>
+                                <t t-esc="action.title"/>
+                            </t>
                         </DropdownItem>
                     </t>
                 </t>

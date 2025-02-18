@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-13 10:28+0000\n"
+"POT-Creation-Date: 2025-02-10 10:34+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
 "Last-Translator: Alina Lisnenko <alina.lisnenko@erp.co.ua>, 2024\n"
 "Language-Team: Ukrainian (https://app.transifex.com/odoo/teams/41243/uk/)\n"
@@ -1552,7 +1552,7 @@ msgstr "Значення клітинки"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "CellIsRule"
-msgstr ""
+msgstr "CellIsRule"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1745,7 +1745,7 @@ msgstr "Колірна гамма"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "ColorScaleRule"
-msgstr ""
+msgstr "ColorScaleRule"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1966,6 +1966,13 @@ msgstr "Конвертує вказаний рядок у нижій регіс�
 #, python-format
 msgid "Converts a specified string to uppercase."
 msgstr "Конвертує вказаний рядок у верхній регістр."
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+#, python-format
+msgid "Converts a string to a numeric value."
+msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3323,6 +3330,8 @@ msgid ""
 "Function [[FUNCTION_NAME]] expects the parameter '%s' to be a single value "
 "or a single cell reference, not a range."
 msgstr ""
+"Функція [[FUNCTION_NAME]] очікує параметр '%s' бути одним значенням або "
+"посиланням на одну клітинку, а не діапазоном."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3650,7 +3659,7 @@ msgstr "Іконка встановлена"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "IconSetRule"
-msgstr ""
+msgstr "IconSetRule"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5836,6 +5845,7 @@ msgid ""
 "Rounds a number down to the nearest integer that is less than or equal to "
 "it."
 msgstr ""
+"Округлює число до найближчого цілого числа, яке менше або дорівнює йому."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -8666,7 +8676,7 @@ msgstr "Число для повернення."
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
 msgid "The number to round down to the nearest integer."
-msgstr ""
+msgstr "Число, яке потрібно округлити до найближчого цілого."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -11799,14 +11809,14 @@ msgstr "по дефолту:"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "difference"
-msgstr ""
+msgstr "різниця"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/global_filters/components/filter_date_value/filter_date_value.xml:0
 #, python-format
 msgid "empty"
-msgstr ""
+msgstr "пусто"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -11829,21 +11839,21 @@ msgstr "помилка"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "formula"
-msgstr ""
+msgstr "формула"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "ge"
-msgstr ""
+msgstr "ge"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "gt"
-msgstr ""
+msgstr "gt"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -11919,7 +11929,7 @@ msgstr "жоден"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "number"
-msgstr ""
+msgstr "число"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -11958,7 +11968,7 @@ msgstr "один рік тому"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "percentage"
-msgstr ""
+msgstr "відсоток"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -11967,7 +11977,7 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "percentile"
-msgstr ""
+msgstr "процентиль"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -11975,7 +11985,7 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "plainText"
-msgstr ""
+msgstr "plainText"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -12022,6 +12032,13 @@ msgstr "start_date (%s) має бути на або до end_date (%s)."
 #, python-format
 msgid "text"
 msgstr "текст"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+#, python-format
+msgid "the string to be converted"
+msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript

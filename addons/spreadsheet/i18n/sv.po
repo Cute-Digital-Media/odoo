@@ -16,16 +16,16 @@
 # Kristoffer Grundström <lovaren@gmail.com>, 2024
 # Lasse L, 2024
 # Anders Wallenquist <anders.wallenquist@vertel.se>, 2024
-# Jakob Krabbe <jakob.krabbe@vertel.se>, 2024
 # Chrille Hedberg <hedberg.chrille@gmail.com>, 2024
+# Jakob Krabbe <jakob.krabbe@vertel.se>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-13 10:28+0000\n"
+"POT-Creation-Date: 2025-02-10 10:34+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
-"Last-Translator: Chrille Hedberg <hedberg.chrille@gmail.com>, 2024\n"
+"Last-Translator: Jakob Krabbe <jakob.krabbe@vertel.se>, 2024\n"
 "Language-Team: Swedish (https://app.transifex.com/odoo/teams/41243/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1988,6 +1988,13 @@ msgstr "Konverterar en angiven sträng till gemener."
 #, python-format
 msgid "Converts a specified string to uppercase."
 msgstr "Konverterar en angiven sträng till versaler."
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+#, python-format
+msgid "Converts a string to a numeric value."
+msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5882,6 +5889,8 @@ msgid ""
 "Rounds a number down to the nearest integer that is less than or equal to "
 "it."
 msgstr ""
+"Avrundar ett tal nedåt till närmaste heltal som är mindre än eller lika med "
+"det."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -8734,7 +8743,7 @@ msgstr "Det nummer som ska returneras."
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, python-format
 msgid "The number to round down to the nearest integer."
-msgstr ""
+msgstr "Det tal som ska avrundas nedåt till närmaste heltal."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -11877,14 +11886,14 @@ msgstr "standard:"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "difference"
-msgstr ""
+msgstr "skillnad"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/global_filters/components/filter_date_value/filter_date_value.xml:0
 #, python-format
 msgid "empty"
-msgstr ""
+msgstr "tom"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -11907,21 +11916,21 @@ msgstr "falsk"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "formula"
-msgstr ""
+msgstr "formel"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "ge"
-msgstr ""
+msgstr "ge"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "gt"
-msgstr ""
+msgstr "gt"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -11997,7 +12006,7 @@ msgstr "ingen"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "number"
-msgstr ""
+msgstr "nummer"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -12036,7 +12045,7 @@ msgstr "för ett år sedan"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "percentage"
-msgstr ""
+msgstr "procent"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -12045,7 +12054,7 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "percentile"
-msgstr ""
+msgstr "percentil"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -12053,7 +12062,7 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "plainText"
-msgstr ""
+msgstr "vanlig text"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -12100,6 +12109,13 @@ msgstr "start_date (%s) bör vara på eller före end_date (%s)."
 #, python-format
 msgid "text"
 msgstr "text"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+#, python-format
+msgid "the string to be converted"
+msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript

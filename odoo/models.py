@@ -87,6 +87,7 @@ regex_field_agg = re.compile(r'(\w+)(?::(\w+)(?:\((\w+)\))?)?')  # For read_grou
 regex_read_group_spec = re.compile(r'(\w+)(\.(\w+))?(?::(\w+))?$')  # For _read_group
 
 AUTOINIT_RECALCULATE_STORED_FIELDS = 1000
+GC_UNLINK_LIMIT = 100_000
 
 INSERT_BATCH_SIZE = 100
 SQL_DEFAULT = psycopg2.extensions.AsIs("DEFAULT")
@@ -1756,12 +1757,31 @@ class BaseModel(metaclass=MetaModel):
         """
         domain = list(domain or ())
         search_fnames = self._rec_names_search or ([self._rec_name] if self._rec_name else [])
+
         if not search_fnames:
             _logger.warning("Cannot execute name_search, no _rec_name or _rec_names_search defined on %s", self._name)
+
         # optimize out the default criterion of ``like ''`` that matches everything
         elif not (name == '' and operator in ('like', 'ilike')):
             aggregator = expression.AND if operator in expression.NEGATIVE_TERM_OPERATORS else expression.OR
-            domain += aggregator([[(field_name, operator, name)] for field_name in search_fnames])
+            domains = []
+            for field_name in search_fnames:
+                # field_name may be a sequence of field names (partner_id.name)
+                # retrieve the last field in the sequence
+                model = self
+                for fname in field_name.split('.'):
+                    field = model._fields[fname]
+                    model = self.env.get(field.comodel_name)
+                if field.relational:
+                    # relational fields will trigger a _name_search on their comodel
+                    domains.append([(field_name, operator, name)])
+                    continue
+                try:
+                    domains.append([(field_name, operator, field.convert_to_write(name, self))])
+                except ValueError:
+                    pass  # ignore that case if the value doesn't match the field type
+            domain += aggregator(domains)
+
         return self._search(domain, limit=limit, order=order)
 
     @api.model
@@ -3306,7 +3326,7 @@ class BaseModel(metaclass=MetaModel):
         # registry classes; the purpose of this attribute is to behave as a
         # cache of [c for c in cls.mro() if not is_registry_class(c))], which
         # is heavily used in function fields.resolve_mro()
-        cls._model_classes = tuple(c for c in cls.mro() if getattr(c, 'pool', None) is None)
+        cls._model_classes__ = tuple(c for c in cls.mro() if getattr(c, 'pool', None) is None)
 
         # 1. determine the proper fields of the model: the fields defined on the
         # class and magic fields, not the inherited or custom ones
@@ -3319,7 +3339,7 @@ class BaseModel(metaclass=MetaModel):
 
         # collect the definitions of each field (base definition + overrides)
         definitions = defaultdict(list)
-        for klass in reversed(cls._model_classes):
+        for klass in reversed(cls._model_classes__):
             # this condition is an optimization of is_definition_class(klass)
             if isinstance(klass, MetaModel):
                 for field in klass._field_definitions:
@@ -4066,22 +4086,22 @@ class BaseModel(metaclass=MetaModel):
             # The first part of the check verifies that all records linked via relation fields are compatible
             # with the company of the origin document, i.e. `self.account_id.company_id == self.company_id`
             for name in regular_fields:
-                corecord = record.sudo()[name]
-                if corecord:
-                    domain = corecord._check_company_domain(company)
-                    if domain and not corecord.with_context(active_test=False).filtered_domain(domain):
-                        inconsistencies.append((record, name, corecord))
+                corecords = record.sudo()[name]
+                if corecords:
+                    domain = corecords._check_company_domain(company)
+                    if domain and corecords != corecords.with_context(active_test=False).filtered_domain(domain):
+                        inconsistencies.append((record, name, corecords))
             # The second part of the check (for property / company-dependent fields) verifies that the records
             # linked via those relation fields are compatible with the company that owns the property value, i.e.
             # the company for which the value is being assigned, i.e:
             #      `self.property_account_payable_id.company_id == self.env.company
             company = self.env.company
             for name in property_fields:
-                corecord = record.sudo()[name]
-                if corecord:
-                    domain = corecord._check_company_domain(company)
-                    if domain and not corecord.with_context(active_test=False).filtered_domain(domain):
-                        inconsistencies.append((record, name, corecord))
+                corecords = record.sudo()[name]
+                if corecords:
+                    domain = corecords._check_company_domain(company)
+                    if domain and corecords != corecords.with_context(active_test=False).filtered_domain(domain):
+                        inconsistencies.append((record, name, corecords))
 
         if inconsistencies:
             lines = [_("Incompatible companies on records:")]
@@ -5075,7 +5095,7 @@ class BaseModel(metaclass=MetaModel):
             existing_modules = self.env['ir.module.module'].sudo().search([]).mapped('name')
             for data in to_create:
                 xml_id = data.get('xml_id')
-                if xml_id:
+                if xml_id and not data.get('noupdate'):
                     module_name, sep, record_id = xml_id.partition('.')
                     if sep and module_name in existing_modules:
                         raise UserError(
@@ -7174,13 +7194,16 @@ class TransientModel(Model):
         # Never delete rows used in last 5 minutes
         seconds = max(seconds, 300)
         self._cr.execute(SQL(
-            "SELECT id FROM %s WHERE %s < %s",
+            "SELECT id FROM %s WHERE %s < %s %s",
             SQL.identifier(self._table),
             SQL("COALESCE(write_date, create_date, (now() AT TIME ZONE 'UTC'))::timestamp"),
             SQL("(now() AT TIME ZONE 'UTC') - interval %s", f"{seconds} seconds"),
+            SQL(f"LIMIT { GC_UNLINK_LIMIT }"),
         ))
         ids = [x[0] for x in self._cr.fetchall()]
         self.sudo().browse(ids).unlink()
+        if len(ids) >= GC_UNLINK_LIMIT:
+            self.env.ref('base.autovacuum_job')._trigger()
 
 
 def itemgetter_tuple(items):

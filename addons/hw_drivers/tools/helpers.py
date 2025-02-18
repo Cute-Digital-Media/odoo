@@ -19,12 +19,13 @@ import requests
 import secrets
 import socket
 import subprocess
+from urllib.parse import parse_qs
 import urllib3
 from threading import Thread, Lock
 import time
 import zipfile
 
-from odoo import _, http, release, service
+from odoo import http, release, service
 from odoo.tools.func import lazy_property
 from odoo.tools.misc import file_path
 
@@ -122,11 +123,11 @@ def check_certificate():
         if key[0] == b'CN':
             cn = key[1].decode('utf-8')
     if cn == 'OdooTempIoTBoxCertificate' or datetime.datetime.now() > cert_end_date:
-        message = _('Your certificate %s must be updated', cn)
+        message = 'Your certificate %s must be updated' % cn
         _logger.info(message)
         return {"status": CertificateStatus.NEED_REFRESH}
     else:
-        message = _('Your certificate %s is valid until %s', cn, cert_end_date)
+        message = 'Your certificate %s is valid until %s' % (cn, cert_end_date)
         _logger.info(message)
         return {"status": CertificateStatus.OK, "message": message}
 
@@ -164,17 +165,20 @@ def check_git_branch():
             )
 
             if db_branch != local_branch:
-                with writable():
-                    subprocess.run(git + ['branch', '-m', db_branch], check=True)
-                    subprocess.run(git + ['remote', 'set-branches', 'origin', db_branch], check=True)
-                    _logger.info("Updating odoo folder to the branch %s", db_branch)
-                    subprocess.run(
-                        ['/home/pi/odoo/addons/point_of_sale/tools/posbox/configuration/posbox_update.sh'], check=True
-                    )
+                try:
+                    with writable():
+                        subprocess.run(git + ['branch', '-m', db_branch], check=True)
+                        subprocess.run(git + ['remote', 'set-branches', 'origin', db_branch], check=True)
+                        _logger.info("Updating odoo folder to the branch %s", db_branch)
+                        subprocess.run(
+                            ['/home/pi/odoo/addons/point_of_sale/tools/posbox/configuration/posbox_update.sh'], check=True
+                        )
+                except subprocess.CalledProcessError:
+                    _logger.exception("Failed to update the code with git.")
+                finally:
                     odoo_restart()
     except Exception:
-        _logger.exception('An error occurred while connecting to server')
-
+        _logger.exception('An error occurred while trying to update the code with git')
 
 def check_image():
     """
@@ -229,7 +233,7 @@ def generate_password():
             subprocess.run(('sudo', 'cp', '/etc/shadow', '/root_bypass_ramdisks/etc/shadow'), check=True)
         return password
     except subprocess.CalledProcessError as e:
-        _logger.error("Failed to generate password: %s", e.output)
+        _logger.exception("Failed to generate password: %s", e.output)
         return 'Error: Check IoT log'
 
 
@@ -288,12 +292,14 @@ def get_ssid():
 
 @cache
 def get_odoo_server_url():
-    if platform.system() == 'Linux':
-        ap = subprocess.call(['systemctl', 'is-active', '--quiet', 'hostapd']) # if service is active return 0 else inactive
-        if not ap:
-            return False
+    """Get the URL of the linked Odoo database.
+    If the IoT Box is in access point mode, it will return ``None`` to avoid
+    connecting to the server.
 
-    return get_conf('remote_server')
+    :return: The URL of the linked Odoo database.
+    :rtype: str or None
+    """
+    return None if access_point() else get_conf('remote_server')
 
 
 def get_token():
@@ -391,17 +397,17 @@ def load_certificate():
 
 
 def delete_iot_handlers():
-    """
-    Delete all the drivers and interfaces
-    This is needed to avoid conflicts
-    with the newly downloaded drivers
+    """Delete all drivers, interfaces and libs if any.
+    This is needed to avoid conflicts with the newly downloaded drivers.
     """
     try:
-        for directory in ['drivers', 'interfaces']:
-            path = file_path(f'hw_drivers/iot_handlers/{directory}')
-            iot_handlers = list_file_by_os(path)
-            for file in iot_handlers:
-                unlink_file(f"odoo/addons/hw_drivers/iot_handlers/{directory}/{file}")
+        iot_handlers = Path(file_path(f'hw_drivers/iot_handlers'))
+        filenames = [
+            f"odoo/addons/hw_drivers/iot_handlers/{file.relative_to(iot_handlers)}"
+            for file in iot_handlers.glob('**/*')
+            if file.is_file()
+        ]
+        unlink_file(*filenames)
         _logger.info("Deleted old IoT handlers")
     except OSError:
         _logger.exception('Failed to delete old IoT handlers')
@@ -420,13 +426,11 @@ def download_iot_handlers(auto=True):
             if resp.data:
                 delete_iot_handlers()
                 with writable():
-                    drivers_path = ['odoo', 'addons', 'hw_drivers', 'iot_handlers']
-                    path = path_file(str(Path().joinpath(*drivers_path)))
+                    path = path_file('odoo', 'addons', 'hw_drivers', 'iot_handlers')
                     zip_file = zipfile.ZipFile(io.BytesIO(resp.data))
                     zip_file.extractall(path)
-        except Exception as e:
-            _logger.error('Could not reach configured server')
-            _logger.error('A error encountered : %s ' % e)
+        except Exception:
+            _logger.exception('Could not reach configured server to download IoT handlers')
 
 def compute_iot_handlers_addon_name(handler_kind, handler_file_name):
     return "odoo.addons.hw_drivers.iot_handlers.{handler_kind}.{handler_name}".\
@@ -447,9 +451,8 @@ def load_iot_handlers():
                 module = util.module_from_spec(spec)
                 try:
                     spec.loader.exec_module(module)
-                except Exception as e:
-                    _logger.error('Unable to load file: %s ', file)
-                    _logger.error('An error encountered : %s ', e)
+                except Exception:
+                    _logger.exception('Unable to load handler file: %s', file)
     lazy_property.reset_all(http.root)
 
 def list_file_by_os(file_list):
@@ -469,12 +472,16 @@ def odoo_restart(delay=0):
     IR.start()
 
 
-def path_file(filename):
+def path_file(*args):
+    """Return the path to the file from IoT Box root or Windows Odoo
+    server folder
+    :return: The path to the file
+    """
     platform_os = platform.system()
     if platform_os == 'Linux':
-        return Path.home() / filename
+        return Path("~pi", *args).expanduser() # Path.home() returns odoo user's home instead of pi's
     elif platform_os == 'Windows':
-        return Path().absolute().parent.joinpath('server/' + filename)
+        return Path().absolute().parent.joinpath('server', *args)
 
 
 def read_file_first_line(filename):
@@ -484,11 +491,12 @@ def read_file_first_line(filename):
             return f.readline().strip('\n')
 
 
-def unlink_file(filename):
+def unlink_file(*filenames):
     with writable():
-        path = path_file(filename)
-        if path.exists():
-            path.unlink()
+        for filename in filenames:
+            path = path_file(filename)
+            if path.exists():
+                path.unlink()
 
 
 def write_file(filename, text, mode='w'):
@@ -521,8 +529,8 @@ def download_from_url(download_url, path_to_filename):
         request_response.raise_for_status()
         write_file(path_to_filename, request_response.content, 'wb')
         _logger.info('Downloaded %s from %s', path_to_filename, download_url)
-    except Exception as e:
-        _logger.error('Failed to download from %s: %s', download_url, e)
+    except Exception:
+        _logger.exception('Failed to download from %s', download_url)
 
 def unzip_file(path_to_filename, path_to_extract):
     """
@@ -539,8 +547,8 @@ def unzip_file(path_to_filename, path_to_extract):
                 zip_file.extractall(path_file(path_to_extract))
             Path(path).unlink()
         _logger.info('Unzipped %s to %s', path_to_filename, path_to_extract)
-    except Exception as e:
-        _logger.error('Failed to unzip %s: %s', path_to_filename, e)
+    except Exception:
+        _logger.exception('Failed to unzip %s', path_to_filename)
 
 
 @cache
@@ -602,7 +610,7 @@ def migrate_old_config_files_to_new_config_file():
         enterprise_code = read_file_first_line('odoo-enterprise-code.conf')
         remote_server = read_file_first_line('odoo-remote-server.conf')
         token = read_file_first_line('token')
-        subject = read_file_first_line('subject')
+        subject = read_file_first_line('odoo-subject.conf')
 
         update_conf({
             'iotbox_version': iotbox_version,
@@ -633,4 +641,39 @@ def migrate_old_config_files_to_new_config_file():
         unlink_file('odoo-enterprise-code.conf')
         unlink_file('odoo-remote-server.conf')
         unlink_file('token')
-        unlink_file('subject')
+        unlink_file('odoo-subject.conf')
+
+
+def url_is_valid(url):
+    """
+    Checks whether the provided url is a valid one or not
+    :param url: the URL to check
+    :return: boolean indicating if the URL is valid.
+    """
+    try:
+        result = urllib3.util.parse_url(url.strip())
+        return all([result.scheme in ["http", "https"], result.netloc, result.host != 'localhost'])
+    except urllib3.exceptions.LocationParseError:
+        return False
+
+
+def parse_url(url):
+    """
+    Parses URL params and returns them as a dictionary starting by the url.
+
+    Does not allow multiple params with the same name (e.g. <url>?a=1&a=2 will return the same as <url>?a=1)
+    :param url: the URL to parse
+    :return: the dictionary containing the URL and params
+    """
+    if not url_is_valid(url):
+        raise ValueError("Invalid URL provided.")
+
+    url = urllib3.util.parse_url(url.strip())
+    search_params = {
+        key: value[0]
+        for key, value in parse_qs(url.query, keep_blank_values=True).items()
+    }
+    return {
+        "url": f"{url.scheme}://{url.netloc}",
+        **search_params,
+    }

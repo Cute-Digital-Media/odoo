@@ -4,16 +4,16 @@
 # 
 # Translators:
 # Martin Trigaux, 2024
-# Abe Manyo, 2024
-# Wil Odoo, 2024
+# Abe Manyo, 2025
+# Wil Odoo, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-13 10:28+0000\n"
+"POT-Creation-Date: 2025-02-10 10:35+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
-"Last-Translator: Wil Odoo, 2024\n"
+"Last-Translator: Wil Odoo, 2025\n"
 "Language-Team: Indonesian (https://app.transifex.com/odoo/teams/41243/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1414,6 +1414,13 @@ msgid "BACK arrow"
 msgstr "BACK arrow"
 
 #. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/search/control_panel/control_panel.js:0
+#, python-format
+msgid "Back to “%s”"
+msgstr "Kembali ke “%s”"
+
+#. module: web
 #: model:ir.model.fields,field_description:web.field_base_document_layout__layout_background_image
 msgid "Background Image"
 msgstr "Gambar Latar"
@@ -1953,7 +1960,6 @@ msgstr "Nama Perusahaan"
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.external_layout_bold
-#: model_terms:ir.ui.view,arch_db:web.external_layout_boxed
 #: model_terms:ir.ui.view,arch_db:web.external_layout_standard
 #: model_terms:ir.ui.view,arch_db:web.external_layout_striped
 msgid "Company tagline"
@@ -2134,7 +2140,6 @@ msgstr "Copyright © 2004"
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/views/fields/image/image_field.js:0
 #: code:addons/web/static/src/views/fields/signature/signature_field.js:0
 #, python-format
 msgid "Could not display the selected image"
@@ -2149,10 +2154,10 @@ msgstr "Tidak dapat menampilkan pdf yang dipilih"
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/views/fields/image_url/image_url_field.js:0
+#: code:addons/web/static/src/views/fields/google_slide_viewer/google_slide_viewer.js:0
 #, python-format
-msgid "Could not display the specified image url."
-msgstr "Tidak dapat menampilkan hasil url gambar."
+msgid "Could not display the selected spreadsheet"
+msgstr "Tidak dapat menampilkan spreadsheet yang dipilih"
 
 #. module: web
 #. odoo-javascript
@@ -2659,7 +2664,7 @@ msgstr "Tampilkan ikon peringatan bila tanggal input di masa depan."
 #: code:addons/web/static/src/views/fields/datetime/datetime_field.js:0
 #, python-format
 msgid "Displays or hides the time in the datetime value."
-msgstr ""
+msgstr "Tampilkan atau sembunyikan waktu di value datetime."
 
 #. module: web
 #. odoo-javascript
@@ -3415,6 +3420,14 @@ msgstr "Dapatkan fitur ini dan lebih banyak lagi dengan Odoo Enterprise!"
 #, python-format
 msgid "Go to URL"
 msgstr "Pergi ke URL"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/google_slide_viewer/google_slide_viewer.js:0
+#: code:addons/web/static/src/views/fields/google_slide_viewer/google_slide_viewer.xml:0
+#, python-format
+msgid "Google Slide Viewer"
+msgstr "Google Slide Viewer"
 
 #. module: web
 #. odoo-javascript
@@ -4302,6 +4315,13 @@ msgstr "Load data demo"
 
 #. module: web
 #. odoo-javascript
+#: code:addons/web/static/src/views/graph/graph_controller.xml:0
+#, python-format
+msgid "Load everything anyway."
+msgstr "Tetap muat semuanya."
+
+#. module: web
+#. odoo-javascript
 #: code:addons/web/static/src/views/kanban/kanban_renderer.xml:0
 #: code:addons/web/static/src/views/kanban/kanban_renderer.xml:0
 #, python-format
@@ -4404,7 +4424,7 @@ msgstr "Aksi Utama"
 #: code:addons/web/static/src/search/custom_favorite_item/custom_favorite_item.xml:0
 #, python-format
 msgid "Make this filter available to other users"
-msgstr ""
+msgstr "Buat filter ini tersedia untuk user lainnya"
 
 #. module: web
 #. odoo-javascript
@@ -4455,6 +4475,13 @@ msgstr "Many2one"
 #, python-format
 msgid "Match"
 msgstr "Cocokkan"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/gauge/gauge_field.js:0
+#, python-format
+msgid "Max value"
+msgstr "Value Maks"
 
 #. module: web
 #. odoo-javascript
@@ -4622,7 +4649,7 @@ msgstr "Ubah Kondisi"
 #: code:addons/web/static/src/views/fields/domain/domain_field.xml:0
 #, python-format
 msgid "Modify filter"
-msgstr ""
+msgstr "Modifikasi filter"
 
 #. module: web
 #. odoo-javascript
@@ -4653,6 +4680,14 @@ msgstr "Bulan"
 #, python-format
 msgid "More"
 msgstr "Selengkapnya"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/statusbar/statusbar_field.xml:0
+#: code:addons/web/static/src/views/fields/statusbar/statusbar_field.xml:0
+#, python-format
+msgid "More..."
+msgstr "Lebih..."
 
 #. module: web
 #. odoo-javascript
@@ -6575,6 +6610,13 @@ msgstr "Pilih semua"
 
 #. module: web
 #. odoo-javascript
+#: code:addons/web/static/src/views/list/list_controller.xml:0
+#, python-format
+msgid "Select all records matching the search"
+msgstr "Pilih semua rekaman yang cocok dengan pencarian"
+
+#. module: web
+#. odoo-javascript
 #: code:addons/web/static/src/core/datetime/datetime_picker.js:0
 #, python-format
 msgid "Select century"
@@ -6757,7 +6799,7 @@ msgstr "Tunjukkan tampilan %s"
 #: code:addons/web/static/src/views/fields/domain/domain_field.xml:0
 #, python-format
 msgid "Show matching records"
-msgstr ""
+msgstr "Tunjukkan record yang cocok"
 
 #. module: web
 #. odoo-javascript
@@ -6772,7 +6814,7 @@ msgstr "Tampilkan sub-fields"
 #: code:addons/web/static/src/views/fields/datetime/datetime_field.js:0
 #, python-format
 msgid "Show time"
-msgstr ""
+msgstr "Tunjukkan waktu"
 
 #. module: web
 #. odoo-javascript
@@ -6895,6 +6937,13 @@ msgstr "Statue of Liberty"
 #, python-format
 msgid "Status"
 msgstr "Status"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/statusbar/statusbar_field.xml:0
+#, python-format
+msgid "Statusbar"
+msgstr "Statusbar"
 
 #. module: web
 #. odoo-javascript
@@ -7182,6 +7231,17 @@ msgstr ""
 "Kompilasi style gagal. Ini adalah error administrator atau developer yang "
 "harus dibetulkan untuk seluruh database sebelum melanjutkan kerja. Lihat "
 "console browser atau log server untuk detail"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/graph/graph_controller.xml:0
+#, python-format
+msgid ""
+"There are too many data. The graph only shows a sample. Use the filters to "
+"refine the scope."
+msgstr ""
+"Terdapat terlalu banyak data. Grafik hanya menunjukkan sampel. Gunakan "
+"filter untuk menyaring cakupan."
 
 #. module: web
 #. odoo-python
@@ -7767,7 +7827,7 @@ msgstr ""
 #: code:addons/web/static/src/search/custom_favorite_item/custom_favorite_item.xml:0
 #, python-format
 msgid "Use this filter by default when opening this view"
-msgstr ""
+msgstr "Gunakan filter ini secara default saat membuka tampilan ini"
 
 #. module: web
 #. odoo-javascript
@@ -8574,7 +8634,7 @@ msgstr "alien monster"
 #: code:addons/web/static/src/core/tree_editor/tree_editor.xml:0
 #, python-format
 msgid "all"
-msgstr "seperti bukan orang"
+msgstr "semua"
 
 #. module: web
 #. odoo-javascript
@@ -22925,7 +22985,7 @@ msgstr "tab baru"
 #: code:addons/web/static/src/views/view_dialogs/export_data_dialog.xml:0
 #, python-format
 msgid "new_template"
-msgstr ""
+msgstr "new_template"
 
 #. module: web
 #. odoo-javascript
@@ -27559,7 +27619,7 @@ msgstr "rekord terpilih,"
 #: code:addons/web/static/src/core/debug/debug_menu_items.xml:0
 #, python-format
 msgid "self"
-msgstr ""
+msgstr "self"
 
 #. module: web
 #. odoo-javascript
@@ -33660,14 +33720,14 @@ msgstr "zombie"
 #: code:addons/web/static/src/views/view_components/column_progress.xml:0
 #, python-format
 msgid "{{ bar.count }} {{ bar.string }}"
-msgstr ""
+msgstr "{{ bar.count }} {{ bar.string }}"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/kanban/kanban_column_quick_create.xml:0
 #, python-format
 msgid "{{ relatedFieldName }}..."
-msgstr ""
+msgstr "{{ relatedFieldName }}..."
 
 #. module: web
 #. odoo-javascript

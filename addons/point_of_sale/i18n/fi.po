@@ -33,16 +33,18 @@
 # Tuomas Lyyra <tuomas.lyyra@legenda.fi>, 2023
 # Mikko Salmela <salmemik@gmail.com>, 2024
 # Martin Trigaux, 2024
-# Ossi Mantylahti <ossi.mantylahti@obs-solutions.fi>, 2024
 # Tuomo Aura <tuomo.aura@web-veistamo.fi>, 2024
+# Karoliina Nisula <karoliina.nisula@tawasta.fi>, 2024
+# Ossi Mantylahti <ossi.mantylahti@obs-solutions.fi>, 2025
+# Wil Odoo, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-13 10:26+0000\n"
+"POT-Creation-Date: 2025-02-10 10:33+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
-"Last-Translator: Tuomo Aura <tuomo.aura@web-veistamo.fi>, 2024\n"
+"Last-Translator: Wil Odoo, 2025\n"
 "Language-Team: Finnish (https://app.transifex.com/odoo/teams/41243/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -58,13 +60,15 @@ msgid ""
 "\n"
 "This issue occurs because the quantity becomes zero after rounding during the conversion. To fix this, adjust the conversion factors or rounding method to ensure that even the smallest quantity in the original unit does not round down to zero in the target unit."
 msgstr ""
+"\n"
+"Tämä ongelma ilmenee, koska määrä muuttuu nollaksi konversion pyöristyksen jälkeen. Voit korjata tämän muokkaamalla konversion muuttujia tai pyöristysmetodia varmistaaksesi, että pieninkään määrä tai yksikkä ei pyöristy nollaan."
 
 #. module: point_of_sale
 #. odoo-python
 #: code:addons/point_of_sale/models/stock_picking.py:0
 #, python-format
 msgid " - From \"%s\" to \"%s\""
-msgstr ""
+msgstr " - \"%s\"stä \"%s\"een"
 
 #. module: point_of_sale
 #. odoo-python
@@ -110,6 +114,13 @@ msgstr "Ale%"
 #, python-format
 msgid "%(pos_name)s (not used)"
 msgstr "%(pos_name)s (ei käytössä)"
+
+#. module: point_of_sale
+#. odoo-javascript
+#: code:addons/point_of_sale/static/src/app/screens/receipt_screen/receipt/receipt_header/receipt_header.js:0
+#, python-format
+msgid "%(vatLabel)s: %(vatId)s"
+msgstr "%(vatLabel)s: %(vatId)s"
 
 #. module: point_of_sale
 #. odoo-python
@@ -920,7 +931,7 @@ msgstr ""
 #: code:addons/point_of_sale/static/src/app/main.js:0
 #, python-format
 msgid "An error occurred while loading the Point of Sale: \n"
-msgstr ""
+msgstr "Kassapäätettä ladattaessa tapahtui virhe: \n"
 
 #. module: point_of_sale
 #: model:ir.model.fields,help:point_of_sale.field_pos_config__name
@@ -1705,7 +1716,7 @@ msgstr "Yhdistelmän ylätaso"
 #: code:addons/point_of_sale/models/product.py:0
 #, python-format
 msgid "Combo products cannot contains variants or attributes"
-msgstr ""
+msgstr "Yhdistelmätuotteet eivät voi sisältää variantteja tai attribuutteja"
 
 #. module: point_of_sale
 #: model_terms:ir.ui.view,arch_db:point_of_sale.view_pos_combo_form
@@ -1878,6 +1889,8 @@ msgid ""
 "Conversion Error: The following unit of measure conversions result in a zero"
 " quantity due to rounding:"
 msgstr ""
+"Konversiovirhe: Seuraavien mittayksiköiden konversiot aiheuttavat määrän "
+"nolla pyöristyksen seurauksena:"
 
 #. module: point_of_sale
 #: model:ir.model.fields,field_description:point_of_sale.field_pos_payment__currency_rate
@@ -2113,7 +2126,7 @@ msgstr "Asiakasnäyttö"
 #: code:addons/point_of_sale/static/src/app/navbar/customer_facing_display_button/customer_facing_display_button.xml:0
 #, python-format
 msgid "Customer Screen : {{message}}"
-msgstr ""
+msgstr "Asiakasnäkymä : {{message}}"
 
 #. module: point_of_sale
 #. odoo-javascript
@@ -2129,7 +2142,7 @@ msgstr "Asiakasnäyttö on yhdistetty"
 #: code:addons/point_of_sale/static/src/app/navbar/customer_facing_display_button/customer_facing_display_button.xml:0
 #, python-format
 msgid "Customer Screen Not Found : {{message}}"
-msgstr ""
+msgstr "Asiakasnäkymää ei löytynyt : {{message}}"
 
 #. module: point_of_sale
 #. odoo-javascript
@@ -2662,7 +2675,7 @@ msgstr "Sähköposti lähetetty."
 #: code:addons/point_of_sale/static/src/app/screens/receipt_screen/receipt_screen.xml:0
 #, python-format
 msgid "Email: {{currentOrder.getEmailItems().join(', ')}}"
-msgstr ""
+msgstr "Sähköposti: {{currentOrder.getEmailItems().join(', ')}}"
 
 #. module: point_of_sale
 #: model_terms:ir.ui.view,arch_db:point_of_sale.pos_config_view_form
@@ -4203,13 +4216,6 @@ msgid "OK"
 msgstr "OK"
 
 #. module: point_of_sale
-#. odoo-javascript
-#: code:addons/point_of_sale/static/src/app/screens/receipt_screen/receipt/order_receipt.xml:0
-#, python-format
-msgid "Odoo Point of Sale"
-msgstr "Odoo Kassa"
-
-#. module: point_of_sale
 #: model:product.template,name:point_of_sale.office_combo_product_template
 msgid "Office combo"
 msgstr "Toimiston yhdistelmä"
@@ -5085,13 +5091,6 @@ msgid "PoS Interface"
 msgstr "Kassan käyttöliittymä"
 
 #. module: point_of_sale
-#. odoo-python
-#: code:addons/point_of_sale/models/pos_session.py:0
-#, python-format
-msgid "PoS Order"
-msgstr "Kassan tilaus"
-
-#. module: point_of_sale
 #: model:ir.model.fields,field_description:point_of_sale.field_product_attribute_custom_value__pos_order_line_id
 msgid "PoS Order Line"
 msgstr "Kassan tilausrivi"
@@ -5406,6 +5405,13 @@ msgstr "Kirjattu"
 #, python-format
 msgid "Powered by"
 msgstr "Järjestelmää pyörittää"
+
+#. module: point_of_sale
+#. odoo-javascript
+#: code:addons/point_of_sale/static/src/app/screens/receipt_screen/receipt/order_receipt.xml:0
+#, python-format
+msgid "Powered by Odoo"
+msgstr "Voimaa Odoosta"
 
 #. module: point_of_sale
 #: model:ir.model.fields,field_description:point_of_sale.field_res_config_settings__module_pos_preparation_display
@@ -6588,7 +6594,7 @@ msgstr "Aseta useita hintoja tuotteille, automaattisia alennuksia ym."
 #: code:addons/point_of_sale/static/src/app/screens/product_screen/product_screen.js:0
 #, python-format
 msgid "Set the new discount"
-msgstr ""
+msgstr "Aseta uusi alennus"
 
 #. module: point_of_sale
 #. odoo-javascript
@@ -7014,6 +7020,13 @@ msgstr "Veron näyttäminen"
 #, python-format
 msgid "Tax ID"
 msgstr "ALV-numero"
+
+#. module: point_of_sale
+#. odoo-javascript
+#: code:addons/point_of_sale/static/src/app/screens/receipt_screen/receipt/receipt_header/receipt_header.js:0
+#, python-format
+msgid "Tax ID: %(vatId)s"
+msgstr "Verotunniste: %(vatId)s"
 
 #. module: point_of_sale
 #: model_terms:ir.ui.view,arch_db:point_of_sale.report_saledetails
@@ -7670,6 +7683,14 @@ msgstr ""
 #: code:addons/point_of_sale/models/account_journal.py:0
 #, python-format
 msgid ""
+"This journal is associated with a payment method. You cannot archive it"
+msgstr "Tämä päiväkirja liittyy maksutapaan. Et voi arkistoida sitä"
+
+#. module: point_of_sale
+#. odoo-python
+#: code:addons/point_of_sale/models/account_journal.py:0
+#, python-format
+msgid ""
 "This journal is associated with a payment method. You cannot modify its type"
 msgstr "Tämä päiväkirja liittyy maksutapaan. Et voi muuttaa sen tyyppiä"
 
@@ -7844,11 +7865,11 @@ msgstr "Punnitaan kassalla"
 msgid ""
 "To delete a product, make sure all point of sale sessions are closed.\n"
 "\n"
-"Deleting a product available in a session would be like attempting to snatch ahamburger from a customer’s hand mid-bite; chaos will ensue as ketchup and mayo go flying everywhere!"
+"Deleting a product available in a session would be like attempting to snatch a hamburger from a customer’s hand mid-bite; chaos will ensue as ketchup and mayo go flying everywhere!"
 msgstr ""
-"Jos haluat poistaa tuotteen, varmista, että kaikki kassojen istunnot on suljettu.\n"
+"Jos haluat poistaa tuotteen, varmista, että kaikki kassan istunnot on suljettu.\n"
 "\n"
-"Tuotteen poistaminen kesken istunnon on vähän kuin nakkimukin nappaaminen lätkäfanin kädestä; rasvamakkara polttaa sormet ja sinappi sotkee kravatin!"
+"Tuotteen poistaminen kesken istunnon on nakkimukin nykäiseminen lätkäfanin kädestä. Ketsuppi roiskuu kravatille!"
 
 #. module: point_of_sale
 #: model:ir.model.fields,field_description:point_of_sale.field_pos_order__to_invoice
@@ -8453,6 +8474,17 @@ msgstr "Et voi käyttää samaa päiväkirjaa useissa käteismaksutavoissa."
 #: code:addons/point_of_sale/models/pos_session.py:0
 #, python-format
 msgid ""
+"You do not have permission to open a POS session. Please try opening a "
+"session with a different user"
+msgstr ""
+"Sinulla ei ole oikeutta avata Kassa-istuntoa. Yritä avata istunto toisella "
+"käyttäjällä"
+
+#. module: point_of_sale
+#. odoo-python
+#: code:addons/point_of_sale/models/pos_session.py:0
+#, python-format
+msgid ""
 "You don't have the access rights to get the point of sale closing control "
 "data."
 msgstr ""
@@ -8795,7 +8827,7 @@ msgstr "olivat olemassa olevien tilausten kaksoiskappaleita"
 #: code:addons/point_of_sale/static/src/app/debug/debug_widget.xml:0
 #, python-format
 msgid "{{ !barcodeReader ? 'No nomenclature' : '' }}"
-msgstr ""
+msgstr "{{ !barcodeReader ? 'Ei nimikkeistöä' : '' }}"
 
 #. module: point_of_sale
 #. odoo-javascript
@@ -8805,6 +8837,8 @@ msgid ""
 "{{ line.has_valid_product_lot() ? 'Valid product lot' : 'Invalid product "
 "lot'}}"
 msgstr ""
+"{{ line.has_valid_product_lot() ? 'Valid product lot' : 'Invalid product "
+"lot'}}"
 
 #. module: point_of_sale
 #. odoo-javascript

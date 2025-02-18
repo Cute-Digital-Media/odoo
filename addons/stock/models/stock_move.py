@@ -7,7 +7,7 @@ from datetime import timedelta
 from operator import itemgetter
 from re import findall as regex_findall
 
-from odoo import _, api, Command, fields, models
+from odoo import SUPERUSER_ID, _, api, Command, fields, models
 from odoo.exceptions import UserError
 from odoo.osv import expression
 from odoo.osv.expression import OR
@@ -360,7 +360,11 @@ class StockMove(models.Model):
     def _set_quantity(self):
         def _process_decrease(move, quantity):
             mls_to_unlink = set()
-            for ml in move.move_line_ids:
+            # Since the move lines might have been created in a certain order to respect
+            # a removal strategy, they need to be unreserved in the opposite order
+            for ml in reversed(move.move_line_ids.sorted('id')):
+                if self.env.context.get('unreserve_unpicked_only') and ml.picked:
+                    continue
                 if float_is_zero(quantity, precision_rounding=move.product_uom.rounding):
                     break
                 qty_ml_dec = min(ml.quantity, ml.product_uom_id._compute_quantity(quantity, ml.product_uom_id, round=False))
@@ -534,9 +538,13 @@ Please change the quantity done or the rounding precision of your unit of measur
                         }))
                         mls_without_lots -= move_line
                     else:  # No line without serial number, creates a new one.
-                        move_line_vals = self._prepare_move_line_vals(quantity=0)
-                        move_line_vals['lot_id'] = lot.id
-                        move_line_vals['lot_name'] = lot.name
+                        reserved_quants = self.env['stock.quant']._get_reserve_quantity(move.product_id, move.location_id, 1.0, lot_id=lot)
+                        if reserved_quants:
+                            move_line_vals = self._prepare_move_line_vals(quantity=0, reserved_quant=reserved_quants[0][0])
+                        else:
+                            move_line_vals = self._prepare_move_line_vals(quantity=0)
+                            move_line_vals['lot_id'] = lot.id
+                            move_line_vals['lot_name'] = lot.name
                         move_line_vals['product_uom_id'] = move.product_id.uom_id.id
                         move_line_vals['quantity'] = 1
                         move_lines_commands.append((0, 0, move_line_vals))
@@ -1016,13 +1024,14 @@ Please change the quantity done or the rounding precision of your unit of measur
         :return: Recordset of moves passed to this method. If some of the passed moves were merged
         into another existing one, return this one and not the (now unlinked) original.
         """
-        distinct_fields = self._prepare_merge_moves_distinct_fields()
 
         candidate_moves_set = set()
         if not merge_into:
             self._update_candidate_moves_list(candidate_moves_set)
         else:
             candidate_moves_set.add(merge_into | self)
+
+        distinct_fields = (self | self.env['stock.move'].concat(*candidate_moves_set))._prepare_merge_moves_distinct_fields()
 
         # Move removed after merge
         moves_to_unlink = self.env['stock.move']
@@ -1158,11 +1167,10 @@ Please change the quantity done or the rounding precision of your unit of measur
         quantity = sum(ml.quantity_product_uom for ml in self.move_line_ids.filtered(lambda ml: not ml.lot_id and ml.lot_name))
         quantity += self.product_id.uom_id._compute_quantity(len(self.lot_ids), self.product_uom)
         self.update({'quantity': quantity})
-
         quants = self.env['stock.quant'].search([('product_id', '=', self.product_id.id),
                                                  ('lot_id', 'in', self.lot_ids.ids),
                                                  ('quantity', '!=', 0),
-                                                 ('location_id', '!=', self.location_id.id),# Exclude the source location
+                                                 '!', ('location_id', 'child_of', self.location_id.id),
                                                  '|', ('location_id.usage', '=', 'customer'),
                                                       '&', ('company_id', '=', self.company_id.id),
                                                            ('location_id.usage', 'in', ('internal', 'transit'))])
@@ -1771,6 +1779,9 @@ Please change the quantity done or the rounding precision of your unit of measur
         # self cannot contain moves that are either cancelled or done, therefore we can safely
         # unlink all associated move_line_ids
         moves_to_cancel._do_unreserve()
+        cancel_moves_origin = self.env['ir.config_parameter'].sudo().get_param('stock.cancel_moves_origin')
+
+        moves_to_cancel.state = 'cancel'
 
         for move in moves_to_cancel:
             siblings_states = (move.move_dest_ids.mapped('move_orig_ids') - move).mapped('state')
@@ -1778,6 +1789,8 @@ Please change the quantity done or the rounding precision of your unit of measur
                 # only cancel the next move if all my siblings are also cancelled
                 if all(state == 'cancel' for state in siblings_states):
                     move.move_dest_ids.filtered(lambda m: m.state != 'done')._action_cancel()
+                    if cancel_moves_origin:
+                        move.move_orig_ids.sudo().filtered(lambda m: m.state != 'done')._action_cancel()
             else:
                 if all(state in ('done', 'cancel') for state in siblings_states):
                     move_dest_ids = move.move_dest_ids
@@ -1786,7 +1799,6 @@ Please change the quantity done or the rounding precision of your unit of measur
                         'move_orig_ids': [Command.unlink(move.id)]
                     })
         moves_to_cancel.write({
-            'state': 'cancel',
             'move_orig_ids': [(5, 0, 0)],
             'procure_method': 'make_to_stock',
         })
@@ -1907,7 +1919,7 @@ Please change the quantity done or the rounding precision of your unit of measur
         for result_package in moves_todo\
                 .move_line_ids.filtered(lambda ml: ml.picked).mapped('result_package_id')\
                 .filtered(lambda p: p.quant_ids and len(p.quant_ids) > 1):
-            if len(result_package.quant_ids.filtered(lambda q: not float_is_zero(abs(q.quantity) + abs(q.reserved_quantity), precision_rounding=q.product_uom_id.rounding)).mapped('location_id')) > 1:
+            if len(result_package.quant_ids.filtered(lambda q: float_compare(q.quantity, 0.0, precision_rounding=q.product_uom_id.rounding) > 0).mapped('location_id')) > 1:
                 raise UserError(_('You cannot move the same package content more than once in the same transfer or split the same package into two location.'))
         if any(ml.package_id and ml.package_id == ml.result_package_id for ml in moves_todo.move_line_ids):
             self.env['stock.quant']._unlink_zero_quants()
@@ -2008,6 +2020,8 @@ Please change the quantity done or the rounding precision of your unit of measur
         return new_move_vals
 
     def _recompute_state(self):
+        if self._context.get('preserve_state'):
+            return
         moves_state_to_write = defaultdict(set)
         for move in self:
             rounding = move.product_uom.rounding
@@ -2034,7 +2048,7 @@ Please change the quantity done or the rounding precision of your unit of measur
 
     def _get_lang(self):
         """Determine language to use for translated description"""
-        return self.picking_id.partner_id.lang or self.partner_id.lang or self.env.user.lang
+        return self.picking_id.partner_id.lang or self.partner_id.lang or (self.env.user.id != SUPERUSER_ID and self.env.user.lang) or self.env.context.get('lang') or self.env['res.users'].browse(SUPERUSER_ID).lang
 
     def _get_source_document(self):
         """ Return the move's document, used by `stock.forecasted_product_productt`
@@ -2250,8 +2264,7 @@ Please change the quantity done or the rounding precision of your unit of measur
         :return: a defaultdict of outgoing moves from warehouse for product_id in self, values are tuple (sum_qty_expected, max_date_expected)
         :rtype: defaultdict
         """
-        wh_location_query = self.env['stock.location']._search([('id', 'child_of', location_id.id if location_id else warehouse.view_location_id.id)])
-
+        wh_location_query = self.env['stock.location']._search([('id', 'child_of', warehouse.view_location_id.id)])
         forecast_lines = self.env['stock.forecasted_product_product']._get_report_lines(False, self.product_id.ids, wh_location_query, location_id or warehouse.lot_stock_id, read=False)
         result = defaultdict(lambda: (0.0, False))
         for line in forecast_lines:

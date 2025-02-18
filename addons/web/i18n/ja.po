@@ -5,16 +5,16 @@
 # Translators:
 # Ryoko Tsuda <ryoko@quartile.co>, 2024
 # Martin Trigaux, 2024
-# Wil Odoo, 2024
-# Junko Augias, 2024
+# Junko Augias, 2025
+# Wil Odoo, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-13 10:28+0000\n"
+"POT-Creation-Date: 2025-02-10 10:35+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
-"Last-Translator: Junko Augias, 2024\n"
+"Last-Translator: Wil Odoo, 2025\n"
 "Language-Team: Japanese (https://app.transifex.com/odoo/teams/41243/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1003,7 +1003,7 @@ msgstr "値を追加する"
 #: code:addons/web/static/src/views/list/list_renderer.xml:0
 #, python-format
 msgid "Add a line"
-msgstr "明細を追加"
+msgstr "明細追加"
 
 #. module: web
 #. odoo-javascript
@@ -1409,6 +1409,13 @@ msgstr "戻る"
 #, python-format
 msgid "BACK arrow"
 msgstr "戻る矢印"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/search/control_panel/control_panel.js:0
+#, python-format
+msgid "Back to “%s”"
+msgstr "“%s” に戻る"
 
 #. module: web
 #: model:ir.model.fields,field_description:web.field_base_document_layout__layout_background_image
@@ -1939,7 +1946,6 @@ msgstr "会社名"
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.external_layout_bold
-#: model_terms:ir.ui.view,arch_db:web.external_layout_boxed
 #: model_terms:ir.ui.view,arch_db:web.external_layout_standard
 #: model_terms:ir.ui.view,arch_db:web.external_layout_striped
 msgid "Company tagline"
@@ -2116,7 +2122,6 @@ msgstr "Copyright © 2004"
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/views/fields/image/image_field.js:0
 #: code:addons/web/static/src/views/fields/signature/signature_field.js:0
 #, python-format
 msgid "Could not display the selected image"
@@ -2131,10 +2136,10 @@ msgstr "選択されたpdfを表示できませんでした"
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/views/fields/image_url/image_url_field.js:0
+#: code:addons/web/static/src/views/fields/google_slide_viewer/google_slide_viewer.js:0
 #, python-format
-msgid "Could not display the specified image url."
-msgstr "指定された画像urlを表示できませんでした。"
+msgid "Could not display the selected spreadsheet"
+msgstr "選択されたスプレッドシートを表示できませんでした"
 
 #. module: web
 #. odoo-javascript
@@ -2203,7 +2208,7 @@ msgstr " <strong>%s</strong> を新規 %sとして作成しますか？"
 #: code:addons/web/static/src/views/fields/relational_utils.js:0
 #, python-format
 msgid "Create and edit..."
-msgstr "作成して編集"
+msgstr "作成と編集"
 
 #. module: web
 #: model:ir.model.fields,field_description:web.field_base_document_layout__create_uid
@@ -3162,7 +3167,7 @@ msgstr "項目："
 #: code:addons/web/static/src/views/view_dialogs/export_data_dialog.xml:0
 #, python-format
 msgid "Fields to export"
-msgstr "エクスポートする項目"
+msgstr "エクスポートするフィールド"
 
 #. module: web
 #. odoo-javascript
@@ -3386,6 +3391,14 @@ msgstr "Odoo企業版では、この機能やその他多数の機能がご利�
 #, python-format
 msgid "Go to URL"
 msgstr "URLへ移動"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/google_slide_viewer/google_slide_viewer.js:0
+#: code:addons/web/static/src/views/fields/google_slide_viewer/google_slide_viewer.xml:0
+#, python-format
+msgid "Google Slide Viewer"
+msgstr "Googleスライドビュワー"
 
 #. module: web
 #. odoo-javascript
@@ -4263,6 +4276,13 @@ msgstr "デモデータをロード"
 
 #. module: web
 #. odoo-javascript
+#: code:addons/web/static/src/views/graph/graph_controller.xml:0
+#, python-format
+msgid "Load everything anyway."
+msgstr "とにかく全てを読込みます。"
+
+#. module: web
+#. odoo-javascript
 #: code:addons/web/static/src/views/kanban/kanban_renderer.xml:0
 #: code:addons/web/static/src/views/kanban/kanban_renderer.xml:0
 #, python-format
@@ -4416,6 +4436,13 @@ msgstr "Many2one"
 #, python-format
 msgid "Match"
 msgstr "突合"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/gauge/gauge_field.js:0
+#, python-format
+msgid "Max value"
+msgstr "最高値"
 
 #. module: web
 #. odoo-javascript
@@ -4611,6 +4638,14 @@ msgstr "月"
 #: code:addons/web/static/src/views/form/button_box/button_box.xml:0
 #, python-format
 msgid "More"
+msgstr "さらに"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/statusbar/statusbar_field.xml:0
+#: code:addons/web/static/src/views/fields/statusbar/statusbar_field.xml:0
+#, python-format
+msgid "More..."
 msgstr "さらに"
 
 #. module: web
@@ -6524,6 +6559,13 @@ msgstr "全て選択"
 
 #. module: web
 #. odoo-javascript
+#: code:addons/web/static/src/views/list/list_controller.xml:0
+#, python-format
+msgid "Select all records matching the search"
+msgstr "検索条件に一致するレコードを全て選択"
+
+#. module: web
+#. odoo-javascript
 #: code:addons/web/static/src/core/datetime/datetime_picker.js:0
 #, python-format
 msgid "Select century"
@@ -6845,6 +6887,13 @@ msgstr "状態"
 
 #. module: web
 #. odoo-javascript
+#: code:addons/web/static/src/views/fields/statusbar/statusbar_field.xml:0
+#, python-format
+msgid "Statusbar"
+msgstr "ステータスバー"
+
+#. module: web
+#. odoo-javascript
 #: code:addons/web/static/src/webclient/settings_form_view/settings_confirmation_dialog.xml:0
 #, python-format
 msgid "Stay Here"
@@ -7032,7 +7081,7 @@ msgstr "牡牛座"
 #: model_terms:ir.ui.view,arch_db:web.external_layout_standard
 #: model_terms:ir.ui.view,arch_db:web.external_layout_striped
 msgid "Tax ID"
-msgstr "適格請求書発行事業者番号"
+msgstr "登録番号"
 
 #. module: web
 #. odoo-javascript
@@ -7123,6 +7172,15 @@ msgid ""
 "browser console or server logs for details."
 msgstr ""
 "スタイルのコンパイルに失敗しました。これは管理者または開発者のエラーで、作業を続行する前にデータベース全体を修正する必要があります。詳細については、ブラウザコンソールまたはサーバログを参照して下さい。"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/graph/graph_controller.xml:0
+#, python-format
+msgid ""
+"There are too many data. The graph only shows a sample. Use the filters to "
+"refine the scope."
+msgstr "データが多すぎます。グラフはサンプルのみを表示しています。フィルタを使用して範囲を絞り込んで下さい。"
 
 #. module: web
 #. odoo-python
@@ -9249,7 +9307,7 @@ msgstr "プリン"
 #: code:addons/web/static/src/core/emoji_picker/emoji_data.js:0
 #, python-format
 msgid "bakery"
-msgstr "パン屋"
+msgstr "製パン店"
 
 #. module: web
 #. odoo-javascript

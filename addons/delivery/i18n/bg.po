@@ -6,20 +6,21 @@
 # aleksandar ivanov, 2023
 # Георги Пехливанов <sonaris@gmail.com>, 2023
 # Martin Trigaux, 2023
-# Boris Stefanov <borkata@gmail.com>, 2023
-# KeyVillage, 2023
 # Albena Mincheva <albena_vicheva@abv.bg>, 2023
 # Igor Sheludko <igor.sheludko@gmail.com>, 2023
 # Maria Boyadjieva <marabo2000@gmail.com>, 2024
 # Meglen Hadzhitsanchev, 2024
+# Petko Karamotchev, 2024
+# Martin Dinovski, 2025
+# KeyVillage, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-13 10:27+0000\n"
+"POT-Creation-Date: 2025-02-10 10:34+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
-"Last-Translator: Meglen Hadzhitsanchev, 2024\n"
+"Last-Translator: KeyVillage, 2025\n"
 "Language-Team: Bulgarian (https://app.transifex.com/odoo/teams/41243/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,7 +40,7 @@ msgstr ""
 #: code:addons/delivery/models/delivery_carrier.py:0
 #, python-format
 msgid "%(old_name)s (copy)"
-msgstr ""
+msgstr "%(old_name)s (копие)"
 
 #. module: delivery
 #: model_terms:ir.ui.view,arch_db:delivery.choose_delivery_carrier_view_form
@@ -56,7 +57,7 @@ msgid ""
 "                </p>"
 msgstr ""
 "<p class=\"o_view_nocontent\">\n"
-"                    Купи Odoo Enterprise и получи повече достачици.\n"
+"                    Купи Odoo Enterprise и получи повече доставчици.\n"
 "                </p>"
 
 #. module: delivery
@@ -86,7 +87,7 @@ msgstr ""
 #. module: delivery
 #: model_terms:ir.ui.view,arch_db:delivery.delivery_report_saleorder_document
 msgid "<strong>Shipping Description:</strong>"
-msgstr ""
+msgstr "<strong>Описание на доставката:</strong> "
 
 #. module: delivery
 #: model:ir.model.fields,help:delivery.field_delivery_carrier__carrier_description
@@ -175,7 +176,7 @@ msgstr "Превозвач"
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier__carrier_description
 msgid "Carrier Description"
-msgstr ""
+msgstr "Описание на превозвача"
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_choose_delivery_carrier__company_id
@@ -345,7 +346,7 @@ msgstr "Отхвърлете"
 #: model:ir.model.fields,field_description:delivery.field_delivery_price_rule__display_name
 #: model:ir.model.fields,field_description:delivery.field_delivery_zip_prefix__display_name
 msgid "Display Name"
-msgstr "Име за Показване"
+msgstr "Показано име"
 
 #. module: delivery
 #: model_terms:ir.actions.act_window,help:delivery.action_delivery_carrier_form
@@ -373,7 +374,7 @@ msgstr "Грешка: този начин на доставка не е възм
 #: code:addons/delivery/models/delivery_carrier.py:0
 #, python-format
 msgid "Error: this delivery method is not available."
-msgstr ""
+msgstr "Грешка: този метод на доставка не е наличен."
 
 #. module: delivery
 #: model:ir.model.fields,help:delivery.field_delivery_carrier__invoice_policy
@@ -406,7 +407,7 @@ msgstr ""
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier__fixed_margin
 msgid "Fixed Margin"
-msgstr ""
+msgstr "Фиксиран марж"
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier__fixed_price
@@ -429,7 +430,7 @@ msgstr "Безплатно, ако сумата на поръчката е по-
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier__return_label_on_delivery
 msgid "Generate Return Label"
-msgstr "Генерирай еткет за връщане"
+msgstr "Генерирай етикет за връщане"
 
 #. module: delivery
 #: model:ir.model.fields.selection,name:delivery.selection__delivery_carrier__integration_level__rate
@@ -471,7 +472,7 @@ msgstr "Инсталирайте повече доставчици"
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier__shipping_insurance
 msgid "Insurance Percentage"
-msgstr ""
+msgstr "Процент застраховка"
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier__integration_level
@@ -481,12 +482,12 @@ msgstr "Ниво на интеграция"
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_choose_delivery_carrier__invoicing_message
 msgid "Invoicing Message"
-msgstr "Съпбщение за фактуриране"
+msgstr "Съобщение за фактуриране"
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier__invoice_policy
 msgid "Invoicing Policy"
-msgstr "Политика по фактуриране"
+msgstr "Политика за фактуриране"
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_sale_order_line__is_delivery
@@ -513,12 +514,12 @@ msgstr "Последно актуализирано на"
 #: model:delivery.carrier,name:delivery.delivery_local_delivery
 #: model:product.template,name:delivery.product_product_local_delivery_product_template
 msgid "Local Delivery"
-msgstr ""
+msgstr "Местна доставка"
 
 #. module: delivery
 #: model:ir.model.fields,help:delivery.field_delivery_carrier__debug_logging
 msgid "Log requests in order to ease debugging"
-msgstr "Лог-вай заявките за по-лесна диагностика"
+msgstr "Заявки в лога за по-лесна диагностика"
 
 #. module: delivery
 #: model_terms:ir.actions.act_window,help:delivery.action_delivery_zip_prefix_list
@@ -555,14 +556,14 @@ msgstr "Име"
 #: code:addons/delivery/models/delivery_carrier.py:0
 #, python-format
 msgid "New Providers"
-msgstr ""
+msgstr "Нови доставчици"
 
 #. module: delivery
 #. odoo-python
 #: code:addons/delivery/models/delivery_carrier.py:0
 #, python-format
 msgid "Not available for current order"
-msgstr ""
+msgstr "Не е налично за текущата поръчка."
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_price_rule__operator
@@ -718,12 +719,15 @@ msgid ""
 "Shipping method details to be included at bottom sales orders and their "
 "confirmation emails. E.g. Instructions for customers to follow."
 msgstr ""
+"Детайлите за метода на доставка ще бъдат включени в долната част на "
+"поръчките за продажба и имейлите за тяхното потвърждение. Например "
+"инструкции, които клиентите трябва да следват."
 
 #. module: delivery
 #: model:delivery.carrier,name:delivery.free_delivery_carrier
 #: model:product.template,name:delivery.product_product_delivery_product_template
 msgid "Standard delivery"
-msgstr ""
+msgstr "Стандартна доставка "
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier__state_ids
@@ -733,7 +737,7 @@ msgstr "Състояния"
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier__supports_shipping_insurance
 msgid "Supports Shipping Insurance"
-msgstr ""
+msgstr "Поддържа застраховка на доставка"
 
 #. module: delivery
 #: model:delivery.carrier,name:delivery.delivery_carrier
@@ -786,7 +790,7 @@ msgstr "Този процент ще бъде добавен към цената
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_choose_delivery_carrier__total_weight
 msgid "Total Order Weight"
-msgstr ""
+msgstr "Общо тегло на поръчката"
 
 #. module: delivery
 #: model_terms:ir.ui.view,arch_db:delivery.choose_delivery_carrier_view_form
@@ -853,6 +857,8 @@ msgid ""
 "You cannot delete the deliveries product category as it is used on the "
 "delivery carriers products."
 msgstr ""
+"Не можете да изтриете категорията продукти за доставки, тъй като се използва"
+" от продуктите на куриерските услуги"
 
 #. module: delivery
 #: model:ir.actions.act_window,name:delivery.action_delivery_zip_prefix_list

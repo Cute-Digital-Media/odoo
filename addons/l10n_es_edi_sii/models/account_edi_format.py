@@ -6,7 +6,6 @@ from urllib3.contrib.pyopenssl import inject_into_urllib3
 from OpenSSL.crypto import load_certificate, load_privatekey, FILETYPE_PEM
 
 from odoo import fields, models, _
-from odoo.exceptions import UserError
 from odoo.tools import html_escape, zeep
 
 import math
@@ -117,6 +116,8 @@ class AccountEdiFormat(models.Model):
         tax_amount_retention = 0.0
         base_amount_not_subject = 0.0
         base_amount_not_subject_loc = 0.0
+        has_not_subject = False
+        has_not_subject_loc = False
         tax_subject_info_list = []
         tax_subject_isp_info_list = []
         for tax_values in tax_details['tax_details'].values():
@@ -152,8 +153,10 @@ class AccountEdiFormat(models.Model):
                 elif tax_values['l10n_es_type'] == 'retencion':
                     tax_amount_retention += tax_values['tax_amount']
                 elif tax_values['l10n_es_type'] == 'no_sujeto':
+                    has_not_subject = True
                     base_amount_not_subject += tax_values['base_amount']
                 elif tax_values['l10n_es_type'] == 'no_sujeto_loc':
+                    has_not_subject_loc = True
                     base_amount_not_subject_loc += tax_values['base_amount']
                 elif tax_values['l10n_es_type'] == 'ignore':
                     continue
@@ -165,8 +168,10 @@ class AccountEdiFormat(models.Model):
                 elif tax_values['l10n_es_type'] == 'retencion':
                     tax_amount_retention += tax_values['tax_amount']
                 elif tax_values['l10n_es_type'] == 'no_sujeto':
+                    has_not_subject = True
                     base_amount_not_subject += tax_values['base_amount']
                 elif tax_values['l10n_es_type'] == 'no_sujeto_loc':
+                    has_not_subject_loc = True
                     base_amount_not_subject_loc += tax_values['base_amount']
                 elif tax_values['l10n_es_type'] == 'ignore':
                     continue
@@ -206,10 +211,15 @@ class AccountEdiFormat(models.Model):
             tax_details_info['Sujeta']['NoExenta']['DesgloseIVA'].setdefault('DetalleIVA', [])
             tax_details_info['Sujeta']['NoExenta']['DesgloseIVA']['DetalleIVA'] += tax_subject_isp_info_list
 
-        if not invoice.company_id.currency_id.is_zero(base_amount_not_subject) and invoice.is_sale_document():
+        if has_not_subject and invoice.is_sale_document():
             tax_details_info['NoSujeta']['ImportePorArticulos7_14_Otros'] = round(sign * base_amount_not_subject, 2)
-        if not invoice.company_id.currency_id.is_zero(base_amount_not_subject_loc) and invoice.is_sale_document():
+        if has_not_subject_loc and invoice.is_sale_document():
             tax_details_info['NoSujeta']['ImporteTAIReglasLocalizacion'] = round(sign * base_amount_not_subject_loc, 2)
+        if not tax_details_info and invoice.is_sale_document():
+            if any(t['l10n_es_type'] == 'no_sujeto' for t in tax_details['tax_details'].values()):
+                tax_details_info['NoSujeta']['ImportePorArticulos7_14_Otros'] = 0
+            if any(t['l10n_es_type'] == 'no_sujeto_loc' for t in tax_details['tax_details'].values()):
+                tax_details_info['NoSujeta']['ImporteTAIReglasLocalizacion'] = 0
 
         return {
             'tax_details_info': tax_details_info,
@@ -275,6 +285,8 @@ class AccountEdiFormat(models.Model):
 
             # === Invoice ===
 
+            if invoice.delivery_date and invoice.delivery_date != invoice.invoice_date:
+                invoice_node['FechaOperacion'] = invoice.delivery_date.strftime('%d-%m-%Y')
             invoice_node['DescripcionOperacion'] = invoice.invoice_origin[:500] if invoice.invoice_origin else 'manual'
             if invoice.is_sale_document():
                 nif = invoice.company_id.vat[2:] if invoice.company_id.vat.startswith('ES') else invoice.company_id.vat
@@ -299,7 +311,11 @@ class AccountEdiFormat(models.Model):
                 if invoice._l10n_es_is_dua():
                     partner_info = self._l10n_es_edi_get_partner_info(invoice.company_id.partner_id)
                 info['IDFactura']['IDEmisorFactura'] = partner_info
-                info['IDFactura']['NumSerieFacturaEmisor'] = invoice.ref[:60]
+                # In case of cancel
+                info["IDFactura"]["IDEmisorFactura"].update(
+                    {"NombreRazon": com_partner.name[0:120]}
+                )
+                info["IDFactura"]["NumSerieFacturaEmisor"] = (invoice.ref or "")[:60]
                 if not is_simplified:
                     invoice_node['Contraparte'] = {
                         **partner_info,
@@ -364,11 +380,6 @@ class AccountEdiFormat(models.Model):
                         invoice_node.setdefault('TipoDesglose', {})
                         invoice_node['TipoDesglose'].setdefault('DesgloseTipoOperacion', {})
                         invoice_node['TipoDesglose']['DesgloseTipoOperacion']['Entrega'] = tax_details_info_consu_vals['tax_details_info']
-                    if not invoice_node.get('TipoDesglose'):
-                        raise UserError(_(
-                            "In case of a foreign customer, you need to configure the tax scope on taxes:\n%s",
-                            "\n".join(invoice.line_ids.tax_ids.mapped('name'))
-                        ))
 
                     invoice_node['ImporteTotal'] = round(sign * (
                         tax_details_info_service_vals['tax_details']['base_amount']
@@ -454,6 +465,9 @@ class AccountEdiFormat(models.Model):
             }
 
     def _l10n_es_edi_call_web_service_sign(self, invoices, info_list):
+        return self._l10n_es_edi_call_web_service_sign_common(invoices, info_list)
+
+    def _l10n_es_edi_call_web_service_sign_common(self, invoices, info_list, cancel=False):
         company = invoices.company_id
 
         # All are sharing the same value.
@@ -499,13 +513,19 @@ class AccountEdiFormat(models.Model):
 
         error_msg = None
         try:
-            if invoices[0].is_sale_document():
-                res = serv.SuministroLRFacturasEmitidas(header, info_list)
+            if cancel:
+                if invoices[0].is_sale_document():
+                    res = serv.AnulacionLRFacturasEmitidas(header, info_list)
+                else:
+                    res = serv.AnulacionLRFacturasRecibidas(header, info_list)
             else:
-                res = serv.SuministroLRFacturasRecibidas(header, info_list)
+                if invoices[0].is_sale_document():
+                    res = serv.SuministroLRFacturasEmitidas(header, info_list)
+                else:
+                    res = serv.SuministroLRFacturasRecibidas(header, info_list)
         except requests.exceptions.SSLError as error:
             error_msg = _("The SSL certificate could not be validated.")
-        except zeep.exceptions.Error as error:
+        except (zeep.exceptions.Error, requests.exceptions.ConnectionError) as error:
             error_msg = _("Networking error:\n%s", error)
         except Exception as error:
             error_msg = str(error)
@@ -556,8 +576,11 @@ class AccountEdiFormat(models.Model):
                         if partner_info.get('NIF') and partner_info['NIF'] == respl_partner_info.NIF:
                             inv = candidate
                             break
-                        if partner_info.get('IDOtro') and all(getattr(respl_partner_info.IDOtro, k) == v
-                                                              for k, v in partner_info['IDOtro'].items()):
+                        if (
+                            partner_info.get('IDOtro')
+                            and respl_partner_info['IDOtro']
+                            and all(respl_partner_info['IDOtro'][k] == v for k, v in partner_info['IDOtro'].items())
+                        ):
                             inv = candidate
                             break
 
@@ -570,12 +593,17 @@ class AccountEdiFormat(models.Model):
                     inv = candidates
 
             resp_line_state = respl.EstadoRegistro
+            respl_dict = dict(respl)
             if resp_line_state in ('Correcto', 'AceptadoConErrores'):
                 inv.l10n_es_edi_csv = l10n_es_edi_csv
                 results[inv] = {'success': True}
                 if resp_line_state == 'AceptadoConErrores':
                     inv.message_post(body=_("This was accepted with errors: ") + html_escape(respl.DescripcionErrorRegistro))
-            elif respl.RegistroDuplicado:
+            elif (
+                (respl_dict.get('RegistroDuplicado') and respl.RegistroDuplicado.EstadoRegistro == 'Correcta')
+                or
+                (cancel and respl_dict.get('CodigoErrorRegistro') == 3001)
+            ):
                 results[inv] = {'success': True}
                 inv.message_post(body=_("We saw that this invoice was sent correctly before, but we did not treat "
                                         "the response.  Make sure it is not because of a wrong configuration."))
@@ -618,6 +646,7 @@ class AccountEdiFormat(models.Model):
                 'post': self._l10n_es_edi_sii_post_invoices,
                 'post_batching': lambda invoice: (invoice.move_type, invoice.l10n_es_edi_csv),
                 'edi_content': self._l10n_es_edi_sii_xml_invoice_content,
+                'cancel': self._l10n_es_edi_sii_cancel_invoices,
             }
 
     def _needs_web_services(self):
@@ -663,7 +692,7 @@ class AccountEdiFormat(models.Model):
 
         return journal.country_code == 'ES'
 
-    def _l10n_es_edi_sii_post_invoices(self, invoices):
+    def _l10n_es_edi_sii_send(self, invoices, cancel=False):
         # Ensure a certificate is available.
         certificate = invoices.company_id.l10n_es_edi_certificate_id
         if not certificate:
@@ -684,7 +713,10 @@ class AccountEdiFormat(models.Model):
         info_list = self._l10n_es_edi_get_invoices_info(invoices)
 
         # Call the web service.
-        res = self._l10n_es_edi_call_web_service_sign(invoices, info_list)
+        if not cancel: #retrocompatibility and mocks in tests
+            res = self._l10n_es_edi_call_web_service_sign(invoices, info_list)
+        else:
+            res = self._l10n_es_edi_call_web_service_sign_common(invoices, info_list, cancel=True)
 
         for inv in invoices:
             if res.get(inv, {}).get('success'):
@@ -697,4 +729,12 @@ class AccountEdiFormat(models.Model):
                     'res_id': inv.id,
                 })
                 res[inv]['attachment'] = attachment
+                if cancel:
+                    inv.l10n_es_edi_csv = False
         return res
+
+    def _l10n_es_edi_sii_post_invoices(self, invoices):
+        return self._l10n_es_edi_sii_send(invoices)
+
+    def _l10n_es_edi_sii_cancel_invoices(self, invoices):
+        return self._l10n_es_edi_sii_send(invoices, cancel=True)

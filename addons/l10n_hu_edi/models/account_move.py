@@ -11,7 +11,7 @@ from psycopg2.errors import LockNotAvailable
 from odoo import fields, models, api, _
 from odoo.http import request
 from odoo.exceptions import UserError, ValidationError
-from odoo.tools import formatLang, float_round, float_repr, cleanup_xml_node, groupby
+from odoo.tools import formatLang, float_compare, float_is_zero, float_round, float_repr, cleanup_xml_node, groupby
 from odoo.tools.misc import split_every
 from odoo.addons.base_iban.models.res_partner_bank import normalize_iban
 from odoo.addons.l10n_hu_edi.models.l10n_hu_edi_connection import format_bool, L10nHuEdiConnection, L10nHuEdiConnectionError
@@ -315,8 +315,8 @@ class AccountMove(models.Model):
     # === EDI: Flow === #
 
     def _l10n_hu_edi_check_invoices(self):
-        errors = []
         hu_vat_regex = re.compile(r'\d{8}-[1-5]-\d{2}')
+        hu_bank_account_regex = re.compile(r'\d{8}-\d{8}-\d{8}|\d{8}-\d{8}|[A-Z]{2}\d{2}[0-9A-Za-z]{11,30}')
 
         # This contains all the advance invoices that correspond to final invoices in `self`.
         advance_invoices = self.filtered(lambda m: not m._is_downpayment()).invoice_line_ids._get_downpayment_lines().mapped('move_id')
@@ -346,6 +346,11 @@ class AccountMove(models.Model):
                 'records': self.company_id.filtered(lambda c: c.currency_id.name != 'HUF'),
                 'message': _('Please use HUF as company currency!'),
                 'action_text': _('View Company/ies'),
+            },
+            'partner_bank_account_invalid': {
+                'records': self.partner_bank_id.filtered(lambda p: not hu_bank_account_regex.fullmatch(p.acc_number)),
+                'message': _('Please set a valid recipient bank account number!'),
+                'action_text': _('View partner(s)'),
             },
             'partner_vat_missing': {
                 'records': self.partner_id.commercial_partner_id.filtered(
@@ -894,7 +899,12 @@ class AccountMove(models.Model):
 
             if line.display_type == 'product':
                 vat_tax = line.tax_ids.filtered(lambda t: t.l10n_hu_tax_type)
-                price_unit_signed = sign * line.price_unit
+
+                if line.quantity == 0.0 or line.discount == 100.0:
+                    price_unit_signed = 0.0
+                else:
+                    price_unit_signed = sign * line.price_subtotal / (1 - line.discount / 100) / line.quantity
+
                 price_net_signed = self.currency_id.round(price_unit_signed * line.quantity * (1 - line.discount / 100.0))
                 discount_value_signed = self.currency_id.round(price_unit_signed * line.quantity - price_net_signed)
                 price_total_signed = sign * line.price_total

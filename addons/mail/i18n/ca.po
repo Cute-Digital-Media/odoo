@@ -14,36 +14,37 @@
 # oscaryuu, 2023
 # ericrolo, 2023
 # Cristian Cruz, 2023
-# marcescu, 2023
 # Eric Antones <eantones@users.noreply.github.com>, 2023
 # Arnau Ros, 2023
 # Carles Antoli <carlesantoli@hotmail.com>, 2023
 # martioodo hola, 2023
 # M Palau <mpalau@tda.ad>, 2023
 # Guspy12, 2023
-# Josep Sànchez <papapep@gmx.com>, 2023
+# Josep Sànchez <papapep@pinatell.net>, 2023
 # Marc Tormo i Bochaca <mtbochaca@gmail.com>, 2023
 # eriiikgt, 2023
-# Harcogourmet, 2023
 # RGB Consulting <odoo@rgbconsulting.com>, 2023
 # Ivan Espinola, 2024
 # jabiri7, 2024
 # Iván Infantes Castarnado, 2024
-# Martin Trigaux, 2024
-# Josep Anton Belchi, 2024
 # Santiago Payà <santiagopim@gmail.com>, 2024
 # Óscar Fonseca <tecnico@pyming.com>, 2024
 # Manel Fernandez Ramirez <manelfera@outlook.com>, 2024
-# Jonatan Gk, 2024
-# Quim - eccit <quim@eccit.com>, 2024
+# Quim - coopdevs <quim.rebull@coopdevs.org>, 2024
+# Martin Trigaux, 2024
+# marcescu, 2024
+# Josep Anton Belchi, 2024
+# Noemi Pla, 2025
+# Xavier, 2025
+# Jonatan Gk, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-13 10:26+0000\n"
+"POT-Creation-Date: 2025-02-10 10:33+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
-"Last-Translator: Quim - eccit <quim@eccit.com>, 2024\n"
+"Last-Translator: Jonatan Gk, 2025\n"
 "Language-Team: Catalan (https://app.transifex.com/odoo/teams/41243/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -91,7 +92,7 @@ msgstr ""
 #: code:addons/mail/static/src/discuss/call/common/rtc_service.js:0
 #, python-format
 msgid "\"%(hostname)s\" requires microphone access"
-msgstr ""
+msgstr "\"%(hostname)s\" requereix accés al micròfon"
 
 #. module: mail
 #. odoo-python
@@ -112,7 +113,7 @@ msgstr ""
 #: code:addons/mail/static/src/discuss/call/common/call_context_menu.js:0
 #, python-format
 msgid "%(candidateType)s (%(protocol)s)"
-msgstr ""
+msgstr "%(candidateType)s (%(protocol)s)"
 
 #. module: mail
 #. odoo-python
@@ -451,7 +452,7 @@ msgstr ""
 #. module: mail
 #: model_terms:ir.ui.view,arch_db:mail.discuss_channel_view_kanban
 msgid "<span class=\"text-bg-danger\">Archived</span>"
-msgstr ""
+msgstr "<span class=\"text-bg-danger\">Arxivat</span>"
 
 #. module: mail
 #: model_terms:ir.ui.view,arch_db:mail.view_server_action_form_template
@@ -652,6 +653,14 @@ msgid "Action Window View"
 msgstr "Vista de la finestra d'acció"
 
 #. module: mail
+#. odoo-javascript
+#: code:addons/mail/static/src/core/common/attachment_list.xml:0
+#: code:addons/mail/static/src/core/common/attachment_list.xml:0
+#, python-format
+msgid "Actions"
+msgstr "Accions"
+
+#. module: mail
 #: model:ir.model.fields,help:mail.field_mail_activity__activity_category
 #: model:ir.model.fields,help:mail.field_mail_activity_schedule__activity_category
 #: model:ir.model.fields,help:mail.field_mail_activity_type__category
@@ -756,7 +765,7 @@ msgstr "Pla d'activitat"
 #: model:ir.actions.act_window,name:mail.mail_activity_plan_action
 #: model:ir.ui.menu,name:mail.menu_mail_activity_plan
 msgid "Activity Plans"
-msgstr ""
+msgstr "Plans d'activitat"
 
 #. module: mail
 #: model_terms:ir.ui.view,arch_db:mail.mail_activity_type_view_form
@@ -1483,6 +1492,11 @@ msgstr ""
 "actual com a fet."
 
 #. module: mail
+#: model_terms:ir.ui.view,arch_db:mail.mail_activity_plan_view_form
+msgid "Available for all Companies"
+msgstr ""
+
+#. module: mail
 #. odoo-javascript
 #: code:addons/mail/static/src/core/common/discuss.xml:0
 #: code:addons/mail/static/src/core/common/message_in_reply.xml:0
@@ -1698,6 +1712,15 @@ msgstr ""
 #, python-format
 msgid "Bounced"
 msgstr "Rebotat"
+
+#. module: mail
+#. odoo-javascript
+#: code:addons/mail/static/src/webclient/web/webclient.js:0
+#, python-format
+msgid ""
+"Brave: enable 'Google Services for Push Messaging' to enable push "
+"notifications"
+msgstr ""
 
 #. module: mail
 #. odoo-javascript
@@ -3102,7 +3125,7 @@ msgstr ""
 
 #. module: mail
 #. odoo-javascript
-#: code:addons/mail/static/src/core/common/attachment_list.xml:0
+#: code:addons/mail/static/src/core/common/attachment_list.js:0
 #: code:addons/mail/static/src/core/common/attachment_list.xml:0
 #: code:addons/mail/static/src/core/common/attachment_list.xml:0
 #: model_terms:ir.ui.view,arch_db:mail.view_document_file_kanban
@@ -3668,6 +3691,13 @@ msgstr "Fallits"
 
 #. module: mail
 #. odoo-javascript
+#: code:addons/mail/static/src/webclient/web/webclient.js:0
+#, python-format
+msgid "Failed to enable push notifications"
+msgstr ""
+
+#. module: mail
+#. odoo-javascript
 #: code:addons/mail/static/src/discuss/gif_picker/common/gif_picker.xml:0
 #, python-format
 msgid "Failed to load gifs..."
@@ -3697,7 +3727,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/mail/models/mail_render_mixin.py:0
 #, python-format
-msgid "Failed to render inline_template template: %(template_txt)s)"
+msgid "Failed to render inline_template template: %(template_txt)s"
 msgstr ""
 
 #. module: mail
@@ -4148,8 +4178,10 @@ msgid "Groups"
 msgstr "Grups"
 
 #. module: mail
+#. odoo-javascript
 #. odoo-python
 #: code:addons/mail/controllers/discuss/public_page.py:0
+#: code:addons/mail/static/src/discuss/core/public/welcome_page.js:0
 #: model:ir.model,name:mail.model_mail_guest
 #: model:ir.model.fields,field_description:mail.field_bus_presence__guest_id
 #: model:ir.model.fields,field_description:mail.field_discuss_channel_member__guest_id
@@ -6805,6 +6837,8 @@ msgid ""
 "Only users belonging to the \"%(group_name)s\" group can modify dynamic "
 "templates."
 msgstr ""
+"Només els usuaris pertanyen al grup \"%(group_name)s\" poden modificar "
+"plantilles dinàmiques."
 
 #. module: mail
 #. odoo-javascript
@@ -6833,6 +6867,14 @@ msgstr "Obrir document"
 #, python-format
 msgid "Open Form View"
 msgstr ""
+
+#. module: mail
+#. odoo-javascript
+#: code:addons/mail/static/src/core/common/attachment_list.xml:0
+#: code:addons/mail/static/src/core/common/attachment_list.xml:0
+#, python-format
+msgid "Open Link"
+msgstr "Enllaç Obert"
 
 #. module: mail
 #: model_terms:ir.ui.view,arch_db:mail.mail_alias_view_tree
@@ -7799,8 +7841,7 @@ msgstr "Camp de relació"
 
 #. module: mail
 #. odoo-javascript
-#: code:addons/mail/static/src/core/common/attachment_list.xml:0
-#: code:addons/mail/static/src/core/common/attachment_list.xml:0
+#: code:addons/mail/static/src/core/common/attachment_list.js:0
 #: code:addons/mail/static/src/core/common/attachment_list.xml:0
 #: code:addons/mail/static/src/core/common/attachment_list.xml:0
 #: code:addons/mail/static/src/core/common/link_preview.xml:0
@@ -8778,7 +8819,7 @@ msgstr "Destacat"
 #: model:ir.model.fields,field_description:mail.field_res_partner__starred_message_ids
 #: model:ir.model.fields,field_description:mail.field_res_users__starred_message_ids
 msgid "Starred Message"
-msgstr ""
+msgstr "Missatge destacat"
 
 #. module: mail
 #. odoo-javascript
@@ -10357,13 +10398,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail.field_ir_ui_view__type
 msgid "View Type"
 msgstr "Tipus de vista"
-
-#. module: mail
-#. odoo-javascript
-#: code:addons/mail/static/src/core/common/attachment_list.xml:0
-#, python-format
-msgid "View image"
-msgstr "Veure imatge"
 
 #. module: mail
 #. odoo-javascript

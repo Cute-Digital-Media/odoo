@@ -113,7 +113,7 @@ class Task(models.Model):
     @api.model
     def _read_group_stage_ids(self, stages, domain, order):
         search_domain = [('id', 'in', stages.ids)]
-        if 'default_project_id' in self.env.context and not self._context.get('subtask_action'):
+        if 'default_project_id' in self.env.context and not self._context.get('subtask_action') and 'project_kanban' in self.env.context:
             search_domain = ['|', ('project_ids', '=', self.env.context['default_project_id'])] + search_domain
 
         stage_ids = stages._search(search_domain, order=order, access_rights_uid=SUPERUSER_ID)
@@ -774,7 +774,7 @@ class Task(models.Model):
             if project.analytic_account_id:
                 vals['analytic_account_id'] = project.analytic_account_id.id
             if 'company_id' in default_fields and 'default_project_id' not in self.env.context:
-                vals['company_id'] = project.sudo().company_id
+                vals['company_id'] = project.sudo().company_id.id
         elif 'default_user_ids' not in self.env.context and 'user_ids' in default_fields:
             user_ids = vals.get('user_ids', [])
             user_ids.append(Command.link(self.env.user.id))
@@ -1211,7 +1211,7 @@ class Task(models.Model):
         })
         filtered_domain = _change_operator(filtered_domain)
         if not filtered_domain:
-            return False
+            return self.env[comodel]
         if additional_domain:
             filtered_domain = expression.AND([filtered_domain, additional_domain])
         return self.env[comodel].search(filtered_domain, order=order)
@@ -1442,6 +1442,7 @@ class Task(models.Model):
         # found.
         create_context = dict(self.env.context or {})
         create_context['default_user_ids'] = False
+        create_context['mail_notify_author'] = True  # Allows sending stage updates to the author
         if custom_values is None:
             custom_values = {}
         # Auto create partner if not existant when the task is created from email
@@ -1496,7 +1497,12 @@ class Task(models.Model):
                 self.displayed_image_id = image_attachments[0]
 
         # use the sanitized body of the email from the message thread to populate the task's description
-        if not self.description and message.subtype_id == self._creation_subtype() and self.partner_id == message.author_id:
+        if (
+           not self.description
+           and message.subtype_id == self._creation_subtype()
+           and self.partner_id == message.author_id
+           and msg_vals['message_type'] == 'email'
+        ):
             self.description = message.body
         return super(Task, self)._message_post_after_hook(message, msg_vals)
 

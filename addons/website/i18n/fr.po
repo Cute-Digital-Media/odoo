@@ -7,16 +7,16 @@
 # Martin Trigaux, 2024
 # Asia Ba, 2024
 # Larissa Manderfeld, 2024
-# Wil Odoo, 2024
-# Manon Rondou, 2024
+# Wil Odoo, 2025
+# Manon Rondou, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-13 10:26+0000\n"
+"POT-Creation-Date: 2025-02-10 10:33+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
-"Last-Translator: Manon Rondou, 2024\n"
+"Last-Translator: Manon Rondou, 2025\n"
 "Language-Team: French (https://app.transifex.com/odoo/teams/41243/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -248,16 +248,6 @@ msgstr "+1 555-555-5556"
 #: model_terms:ir.ui.view,arch_db:website.template_footer_links
 msgid "+1 555-555-5556\""
 msgstr "+1 555-555-5556\""
-
-#. module: website
-#: model_terms:ir.ui.view,arch_db:website.searchbar_input_snippet_options
-msgid ", .s_searchbar_input"
-msgstr ", .s_searchbar_input"
-
-#. module: website
-#: model_terms:ir.ui.view,arch_db:website.s_website_form_options
-msgid ", .s_website_form"
-msgstr ", .s_website_form"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.show_website_info
@@ -1909,8 +1899,8 @@ msgstr "Ajouter des langues"
 #. odoo-javascript
 #: code:addons/website/static/src/snippets/s_website_form/options.js:0
 #, python-format
-msgid "Add new %s"
-msgstr "Ajouter nouveau %s"
+msgid "Add option"
+msgstr "Ajouter une option"
 
 #. module: website
 #. odoo-javascript
@@ -3112,6 +3102,13 @@ msgid "Checkbox"
 msgstr "Case à cocher"
 
 #. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+#, python-format
+msgid "Checkbox List"
+msgstr "Liste de cases à cocher"
+
+#. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_product_catalog
 msgid "Cheese Onion Rings"
 msgstr "Rondelles d'oignon au fromage"
@@ -3859,6 +3856,14 @@ msgstr "Code personnalisé"
 #: model_terms:ir.ui.view,arch_db:website.snippet_options
 msgid "Custom Key"
 msgstr "Clé personnalisée"
+
+#. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+#, python-format
+msgid "Custom Text"
+msgstr "Texte personnalisé"
 
 #. module: website
 #. odoo-javascript
@@ -5008,6 +5013,13 @@ msgstr "Exemples"
 
 #. module: website
 #. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+#, python-format
+msgid "Existing Fields"
+msgstr "Champs existants"
+
+#. module: website
+#. odoo-javascript
 #: code:addons/website/static/src/components/resource_editor/utils.js:0
 #, python-format
 msgid "Expected "
@@ -5229,6 +5241,13 @@ msgid "Fetched elements"
 msgstr "Éléments récupérés"
 
 #. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+#, python-format
+msgid "Field"
+msgstr "Champ"
+
+#. module: website
 #: model:ir.model.fields,field_description:website.field_website_snippet_filter__field_names
 msgid "Field Names"
 msgstr "Noms de champ"
@@ -5444,7 +5463,7 @@ msgstr "Suivez-nous"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippet_options
 msgid "Font"
-msgstr "Fonte"
+msgstr "Police"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippet_options
@@ -8749,6 +8768,13 @@ msgid "Option 3"
 msgstr "Option 3"
 
 #. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+#, python-format
+msgid "Option List"
+msgstr "Liste d'options"
+
+#. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
 msgid "Optional"
 msgstr "Facultatif"
@@ -9684,6 +9710,13 @@ msgid "Radar"
 msgstr "Radar"
 
 #. module: website
+#. odoo-javascript
+#: code:addons/website/static/src/snippets/s_website_form/options.js:0
+#, python-format
+msgid "Radio Button List"
+msgstr "Liste de boutons radio"
+
+#. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_website_form_options
 msgid "Radio Buttons"
 msgstr "Boutons radio"
@@ -10445,7 +10478,7 @@ msgstr "Service"
 #: model_terms:ir.ui.view,arch_db:website.template_footer_links
 #: model_terms:ir.ui.view,arch_db:website.template_footer_minimalist
 msgid "Services"
-msgstr "Interventions"
+msgstr "Services"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.cookie_policy
@@ -10980,7 +11013,7 @@ msgstr "Commencez à vendre vos produits et services aujourd'hui."
 #: model_terms:ir.ui.view,arch_db:website.s_tabs
 #: model_terms:ir.ui.view,arch_db:website.s_text_image
 msgid "Start with the customer – find out what they want and give it to them."
-msgstr "Commencez par le client: trouvez ce qu'il veut et donner-le lui."
+msgstr "Commencez par le client : trouvez ce qu'il veut et donnez-le lui."
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_carousel
@@ -11334,7 +11367,7 @@ msgstr "Texte Image Texte"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_countdown_options
 msgid "Text Inline"
-msgstr "Texte inline"
+msgstr "Édition du texte"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_media_list_options
@@ -11884,7 +11917,7 @@ msgstr "Cette arche de vue a été modifiée"
 
 #. module: website
 #. odoo-javascript
-#: code:addons/website/static/src/systray_items/website_switcher.xml:0
+#: code:addons/website/static/src/systray_items/website_switcher.js:0
 #, python-format
 msgid "This website does not have a domain configured."
 msgstr "Aucun domaine n'est configuré pour ce site web."
@@ -14026,7 +14059,7 @@ msgstr "fonts.google.com"
 #: code:addons/website/static/src/client_actions/configurator/configurator.xml:0
 #, python-format
 msgid "for my"
-msgstr "pour mon commerce de"
+msgstr "pour mon business de"
 
 #. module: website
 #. odoo-javascript

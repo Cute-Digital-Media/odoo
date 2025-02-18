@@ -5,16 +5,16 @@
 # Translators:
 # Yoshi Tashiro (Quartile) <tashiro@roomsfor.hk>, 2024
 # Ryoko Tsuda <ryoko@quartile.co>, 2024
-# Wil Odoo, 2024
-# Junko Augias, 2024
+# Wil Odoo, 2025
+# Junko Augias, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-13 10:26+0000\n"
+"POT-Creation-Date: 2025-02-10 10:33+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
-"Last-Translator: Junko Augias, 2024\n"
+"Last-Translator: Junko Augias, 2025\n"
 "Language-Team: Japanese (https://app.transifex.com/odoo/teams/41243/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,13 +30,15 @@ msgid ""
 "\n"
 "This issue occurs because the quantity becomes zero after rounding during the conversion. To fix this, adjust the conversion factors or rounding method to ensure that even the smallest quantity in the original unit does not round down to zero in the target unit."
 msgstr ""
+"\n"
+"この問題は、変換時に丸めが行われる際に数量がゼロになるために発生します。この問題を解決するには、変換係数または丸めの方法を調整し、元の単位の数量が目標単位でゼロに切り捨てられないようにします。"
 
 #. module: point_of_sale
 #. odoo-python
 #: code:addons/point_of_sale/models/stock_picking.py:0
 #, python-format
 msgid " - From \"%s\" to \"%s\""
-msgstr ""
+msgstr " -  \"%s\" から \"%s\" へ"
 
 #. module: point_of_sale
 #. odoo-python
@@ -82,6 +84,13 @@ msgstr "% 値引"
 #, python-format
 msgid "%(pos_name)s (not used)"
 msgstr "%(pos_name)s（未使用）"
+
+#. module: point_of_sale
+#. odoo-javascript
+#: code:addons/point_of_sale/static/src/app/screens/receipt_screen/receipt/receipt_header/receipt_header.js:0
+#, python-format
+msgid "%(vatLabel)s: %(vatId)s"
+msgstr "%(vatLabel)s: %(vatId)s"
 
 #. module: point_of_sale
 #. odoo-python
@@ -862,7 +871,7 @@ msgstr "プロダクト価格の読み込み中にエラーが発生しました
 #: code:addons/point_of_sale/static/src/app/main.js:0
 #, python-format
 msgid "An error occurred while loading the Point of Sale: \n"
-msgstr ""
+msgstr "POS読み込み中にエラーが発生しました: \n"
 
 #. module: point_of_sale
 #: model:ir.model.fields,help:point_of_sale.field_pos_config__name
@@ -1805,7 +1814,7 @@ msgstr "限られた機能で継続する"
 msgid ""
 "Conversion Error: The following unit of measure conversions result in a zero"
 " quantity due to rounding:"
-msgstr ""
+msgstr "変換エラー:以下の単位変換では、丸めにより数量がゼロになります:"
 
 #. module: point_of_sale
 #: model:ir.model.fields,field_description:point_of_sale.field_pos_payment__currency_rate
@@ -3270,7 +3279,7 @@ msgstr "請求されます"
 #. module: point_of_sale
 #: model:ir.model.fields,field_description:point_of_sale.field_res_config_settings__is_kiosk_mode
 msgid "Is Kiosk Mode"
-msgstr "Kioskモード"
+msgstr "キオスクモード"
 
 #. module: point_of_sale
 #: model:ir.model.fields,field_description:point_of_sale.field_pos_order__is_refunded
@@ -3368,7 +3377,7 @@ msgstr "仕訳項目"
 #. module: point_of_sale
 #: model:ir.model.fields,field_description:point_of_sale.field_digest_digest__kpi_pos_total_value
 msgid "Kpi Pos Total Value"
-msgstr "KpiPos合計値"
+msgstr "KpiPos合計金額"
 
 #. module: point_of_sale
 #: model:product.template,name:point_of_sale.led_lamp_product_template
@@ -4096,13 +4105,6 @@ msgid "OK"
 msgstr "OK"
 
 #. module: point_of_sale
-#. odoo-javascript
-#: code:addons/point_of_sale/static/src/app/screens/receipt_screen/receipt/order_receipt.xml:0
-#, python-format
-msgid "Odoo Point of Sale"
-msgstr "Odoo POS"
-
-#. module: point_of_sale
 #: model:product.template,name:point_of_sale.office_combo_product_template
 msgid "Office combo"
 msgstr "オフィスコンボ"
@@ -4581,7 +4583,7 @@ msgstr "取引先"
 #: code:addons/point_of_sale/static/src/app/screens/receipt_screen/receipt_screen.xml:0
 #, python-format
 msgid "Pay"
-msgstr "お支払い"
+msgstr "支払"
 
 #. module: point_of_sale
 #: model_terms:ir.ui.view,arch_db:point_of_sale.view_pos_payment
@@ -4732,7 +4734,7 @@ msgstr "支払差額"
 #. module: point_of_sale
 #: model:ir.actions.act_window,name:point_of_sale.action_payment_methods_tree
 msgid "Payments Methods"
-msgstr "お支払い方法"
+msgstr "支払方法"
 
 #. module: point_of_sale
 #. odoo-javascript
@@ -4957,13 +4959,6 @@ msgstr "お客様を選択してください"
 #: model_terms:ir.ui.view,arch_db:point_of_sale.res_config_settings_view_form
 msgid "PoS Interface"
 msgstr "POSインターフェイス"
-
-#. module: point_of_sale
-#. odoo-python
-#: code:addons/point_of_sale/models/pos_session.py:0
-#, python-format
-msgid "PoS Order"
-msgstr "POSオーダ"
 
 #. module: point_of_sale
 #: model:ir.model.fields,field_description:point_of_sale.field_product_attribute_custom_value__pos_order_line_id
@@ -5280,6 +5275,13 @@ msgstr "記帳済"
 #, python-format
 msgid "Powered by"
 msgstr "Powered by"
+
+#. module: point_of_sale
+#. odoo-javascript
+#: code:addons/point_of_sale/static/src/app/screens/receipt_screen/receipt/order_receipt.xml:0
+#, python-format
+msgid "Powered by Odoo"
+msgstr "Powered by Odoo"
 
 #. module: point_of_sale
 #: model:ir.model.fields,field_description:point_of_sale.field_res_config_settings__module_pos_preparation_display
@@ -6453,7 +6455,7 @@ msgstr "プロダクト毎に複数の価格や自動値引などを設定"
 #: code:addons/point_of_sale/static/src/app/screens/product_screen/product_screen.js:0
 #, python-format
 msgid "Set the new discount"
-msgstr ""
+msgstr "新規割引を設定"
 
 #. module: point_of_sale
 #. odoo-javascript
@@ -6874,7 +6876,14 @@ msgstr "税表示"
 #: code:addons/point_of_sale/static/src/app/screens/partner_list/partner_editor/partner_editor.xml:0
 #, python-format
 msgid "Tax ID"
-msgstr "適格請求書発行事業者番号"
+msgstr "登録番号"
+
+#. module: point_of_sale
+#. odoo-javascript
+#: code:addons/point_of_sale/static/src/app/screens/receipt_screen/receipt/receipt_header/receipt_header.js:0
+#, python-format
+msgid "Tax ID: %(vatId)s"
+msgstr "登録番号: %(vatId)s"
 
 #. module: point_of_sale
 #: model_terms:ir.ui.view,arch_db:point_of_sale.report_saledetails
@@ -7024,6 +7033,8 @@ msgid ""
 "The amount of your payment lines must be rounded to validate the transaction.\n"
 "The rounding precision is %s so you should set %s or %s as payment amount instead of %s."
 msgstr ""
+"支払明細の金額は、取引を検証するために丸める必要があります。\n"
+"丸め精度は%s です。支払額には %s または %s を設定して下さい。(%sの代わりに)"
 
 #. module: point_of_sale
 #. odoo-python
@@ -7467,6 +7478,14 @@ msgstr "これは、特定の税率を暗示するオンサイトおよびテイ
 #: code:addons/point_of_sale/models/account_journal.py:0
 #, python-format
 msgid ""
+"This journal is associated with a payment method. You cannot archive it"
+msgstr "この仕訳帳は支払方法に関連付けられています。アーカイブできません。"
+
+#. module: point_of_sale
+#. odoo-python
+#: code:addons/point_of_sale/models/account_journal.py:0
+#, python-format
+msgid ""
 "This journal is associated with a payment method. You cannot modify its type"
 msgstr "この仕訳帳は支払方法に関連付けられています。タイプは変更できません。"
 
@@ -7629,11 +7648,11 @@ msgstr "はかりで計量"
 msgid ""
 "To delete a product, make sure all point of sale sessions are closed.\n"
 "\n"
-"Deleting a product available in a session would be like attempting to snatch ahamburger from a customer’s hand mid-bite; chaos will ensue as ketchup and mayo go flying everywhere!"
+"Deleting a product available in a session would be like attempting to snatch a hamburger from a customer’s hand mid-bite; chaos will ensue as ketchup and mayo go flying everywhere!"
 msgstr ""
 "プロダクトを削除するには、全てのPOSセッションが終了していることを確認して下さい。\n"
 "\n"
-"セッションで利用可能なプロダクトを削除することは、ハンバーガーを食べている途中の客の手からハンバーガーを奪い取ろうとするようなものです！"
+"セッションで利用可能なプロダクトを削除することは、ハンバーガーを食べている途中の客の手からハンバーガーを奪い取ろうとするようなものです!"
 
 #. module: point_of_sale
 #: model:ir.model.fields,field_description:point_of_sale.field_pos_order__to_invoice
@@ -7726,7 +7745,7 @@ msgstr "合計税抜価格:"
 #. module: point_of_sale
 #: model:ir.model.fields,help:point_of_sale.field_pos_payment__amount
 msgid "Total amount of the payment."
-msgstr "お支払い総額。"
+msgstr "支払総額。"
 
 #. module: point_of_sale
 #: model:ir.model.fields,field_description:point_of_sale.field_pos_order_line__total_cost
@@ -8041,7 +8060,7 @@ msgstr "計量"
 #. module: point_of_sale
 #: model:ir.model.fields.selection,name:point_of_sale.selection__barcode_rule__type__weight
 msgid "Weighted Product"
-msgstr "計量対象製品"
+msgstr "計量対象プロダクト"
 
 #. module: point_of_sale
 #: model:ir.model.fields.selection,name:point_of_sale.selection__pos_config__picking_policy__one
@@ -8213,6 +8232,15 @@ msgstr "同じ通貨を使用していない設定のオープンオーダを共
 #, python-format
 msgid "You cannot use the same journal on multiples cash payment methods."
 msgstr "複数の現金支払方法で同じ仕訳帳を使用することはできません。"
+
+#. module: point_of_sale
+#. odoo-python
+#: code:addons/point_of_sale/models/pos_session.py:0
+#, python-format
+msgid ""
+"You do not have permission to open a POS session. Please try opening a "
+"session with a different user"
+msgstr "POSセッションを開く権限がありません。別のユーザでセッションを開いてみて下さい。"
 
 #. module: point_of_sale
 #. odoo-python
@@ -8443,7 +8471,7 @@ msgstr "予測"
 #: code:addons/point_of_sale/static/src/app/screens/ticket_screen/ticket_screen.xml:0
 #, python-format
 msgid "in"
-msgstr "に"
+msgstr ":"
 
 #. module: point_of_sale
 #. odoo-javascript

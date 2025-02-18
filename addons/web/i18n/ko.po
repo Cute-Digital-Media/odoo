@@ -5,16 +5,16 @@
 # Translators:
 # Sarah Park, 2023
 # Martin Trigaux, 2024
-# Wil Odoo, 2024
-# Daye Jeong, 2024
+# Daye Jeong, 2025
+# Wil Odoo, 2025
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-13 10:28+0000\n"
+"POT-Creation-Date: 2025-02-10 10:35+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
-"Last-Translator: Daye Jeong, 2024\n"
+"Last-Translator: Wil Odoo, 2025\n"
 "Language-Team: Korean (https://app.transifex.com/odoo/teams/41243/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1411,6 +1411,13 @@ msgid "BACK arrow"
 msgstr "뒤로가기 화살표"
 
 #. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/search/control_panel/control_panel.js:0
+#, python-format
+msgid "Back to “%s”"
+msgstr "“%s”로 돌아가기"
+
+#. module: web
 #: model:ir.model.fields,field_description:web.field_base_document_layout__layout_background_image
 msgid "Background Image"
 msgstr "배경 이미지"
@@ -1940,7 +1947,6 @@ msgstr "회사명"
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.external_layout_bold
-#: model_terms:ir.ui.view,arch_db:web.external_layout_boxed
 #: model_terms:ir.ui.view,arch_db:web.external_layout_standard
 #: model_terms:ir.ui.view,arch_db:web.external_layout_striped
 msgid "Company tagline"
@@ -2117,7 +2123,6 @@ msgstr "저작권 © 2004"
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/views/fields/image/image_field.js:0
 #: code:addons/web/static/src/views/fields/signature/signature_field.js:0
 #, python-format
 msgid "Could not display the selected image"
@@ -2132,10 +2137,10 @@ msgstr "선택한 PDF를 볼 수 없습니다"
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/views/fields/image_url/image_url_field.js:0
+#: code:addons/web/static/src/views/fields/google_slide_viewer/google_slide_viewer.js:0
 #, python-format
-msgid "Could not display the specified image url."
-msgstr "지정한 경로의 이미지를 볼수 없습니다."
+msgid "Could not display the selected spreadsheet"
+msgstr "선택한 스프레드시트를 볼 수 없습니다"
 
 #. module: web
 #. odoo-javascript
@@ -2639,7 +2644,7 @@ msgstr "입력 날짜가 미래인 경우 경고 아이콘을 표시합니다."
 #: code:addons/web/static/src/views/fields/datetime/datetime_field.js:0
 #, python-format
 msgid "Displays or hides the time in the datetime value."
-msgstr ""
+msgstr "날짜/시간 값에 시간을 표시하거나 숨깁니다."
 
 #. module: web
 #. odoo-javascript
@@ -3387,6 +3392,14 @@ msgstr "Odoo 유료버전용에서 이 기능을 비롯한 다양한 기능을 �
 #, python-format
 msgid "Go to URL"
 msgstr "URL로 이동"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/google_slide_viewer/google_slide_viewer.js:0
+#: code:addons/web/static/src/views/fields/google_slide_viewer/google_slide_viewer.xml:0
+#, python-format
+msgid "Google Slide Viewer"
+msgstr "Google 슬라이드 뷰어"
 
 #. module: web
 #. odoo-javascript
@@ -4264,6 +4277,13 @@ msgstr "시연 데이터 불러오기"
 
 #. module: web
 #. odoo-javascript
+#: code:addons/web/static/src/views/graph/graph_controller.xml:0
+#, python-format
+msgid "Load everything anyway."
+msgstr "모든 항목을 로드합니다."
+
+#. module: web
+#. odoo-javascript
 #: code:addons/web/static/src/views/kanban/kanban_renderer.xml:0
 #: code:addons/web/static/src/views/kanban/kanban_renderer.xml:0
 #, python-format
@@ -4366,7 +4386,7 @@ msgstr "주요 활동"
 #: code:addons/web/static/src/search/custom_favorite_item/custom_favorite_item.xml:0
 #, python-format
 msgid "Make this filter available to other users"
-msgstr ""
+msgstr "다른 사용자가 이 필터를 사용할 수 있도록 설정"
 
 #. module: web
 #. odoo-javascript
@@ -4417,6 +4437,13 @@ msgstr "Many2one"
 #, python-format
 msgid "Match"
 msgstr "일치"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/gauge/gauge_field.js:0
+#, python-format
+msgid "Max value"
+msgstr "최대값"
 
 #. module: web
 #. odoo-javascript
@@ -4582,7 +4609,7 @@ msgstr "조건 변경"
 #: code:addons/web/static/src/views/fields/domain/domain_field.xml:0
 #, python-format
 msgid "Modify filter"
-msgstr ""
+msgstr "필터 수정"
 
 #. module: web
 #. odoo-javascript
@@ -4612,6 +4639,14 @@ msgstr "월"
 #: code:addons/web/static/src/views/form/button_box/button_box.xml:0
 #, python-format
 msgid "More"
+msgstr "더 보기"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/statusbar/statusbar_field.xml:0
+#: code:addons/web/static/src/views/fields/statusbar/statusbar_field.xml:0
+#, python-format
+msgid "More..."
 msgstr "더 보기"
 
 #. module: web
@@ -6525,6 +6560,13 @@ msgstr "전체 선택"
 
 #. module: web
 #. odoo-javascript
+#: code:addons/web/static/src/views/list/list_controller.xml:0
+#, python-format
+msgid "Select all records matching the search"
+msgstr "검색과 일치하는 모든 레코드를 선택합니다."
+
+#. module: web
+#. odoo-javascript
 #: code:addons/web/static/src/core/datetime/datetime_picker.js:0
 #, python-format
 msgid "Select century"
@@ -6705,7 +6747,7 @@ msgstr "%s 보기 표시"
 #: code:addons/web/static/src/views/fields/domain/domain_field.xml:0
 #, python-format
 msgid "Show matching records"
-msgstr ""
+msgstr "일치하는 레코드 표시"
 
 #. module: web
 #. odoo-javascript
@@ -6720,7 +6762,7 @@ msgstr "하위 필드 표시"
 #: code:addons/web/static/src/views/fields/datetime/datetime_field.js:0
 #, python-format
 msgid "Show time"
-msgstr ""
+msgstr "시간 표시"
 
 #. module: web
 #. odoo-javascript
@@ -6843,6 +6885,13 @@ msgstr "자유의 여신상"
 #, python-format
 msgid "Status"
 msgstr "상태"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/statusbar/statusbar_field.xml:0
+#, python-format
+msgid "Statusbar"
+msgstr "Statusbar"
 
 #. module: web
 #. odoo-javascript
@@ -7124,6 +7173,15 @@ msgid ""
 msgstr ""
 "스타일 컴파일 중에 오류가 발생했습니다. 작업을 계속하기 전에 전체 데이터베이스에 대해 수정해야 하는 관리자 또는 개발자 오류입니다. "
 "자세한 내용은 브라우저 콘솔 또는 서버 로그를 참조하세요."
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/graph/graph_controller.xml:0
+#, python-format
+msgid ""
+"There are too many data. The graph only shows a sample. Use the filters to "
+"refine the scope."
+msgstr "데이터가 너무 많아 그래프에서는 일부 샘플만 표시됩니다. 필터를 사용해 범위를 조정하세요."
 
 #. module: web
 #. odoo-python
@@ -7702,7 +7760,7 @@ msgstr "'사용자 친화적 형식' 옵션과 함께 사용하여 서식을 맞
 #: code:addons/web/static/src/search/custom_favorite_item/custom_favorite_item.xml:0
 #, python-format
 msgid "Use this filter by default when opening this view"
-msgstr ""
+msgstr "이 보기를 열 때 기본적으로 이 필터를 사용합니다."
 
 #. module: web
 #. odoo-javascript
@@ -33586,14 +33644,14 @@ msgstr "좀비"
 #: code:addons/web/static/src/views/view_components/column_progress.xml:0
 #, python-format
 msgid "{{ bar.count }} {{ bar.string }}"
-msgstr ""
+msgstr "{{ bar.count }} {{ bar.string }}"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/kanban/kanban_column_quick_create.xml:0
 #, python-format
 msgid "{{ relatedFieldName }}..."
-msgstr ""
+msgstr "{{ relatedFieldName }}..."
 
 #. module: web
 #. odoo-javascript

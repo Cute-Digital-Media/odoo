@@ -3,7 +3,7 @@
 # 	* loyalty
 # 
 # Translators:
-# Tibor Kőnig <konig.tibor@evitalit.hu>, 2023
+# f1b3a33e3b33fcf18004a5292e501f50_3500ca8 <373b677b151624c4521d9efc77b996fd_750224>, 2023
 # Kovács Tibor <kovika@gmail.com>, 2023
 # Ákos Nagy <akos.nagy@oregional.hu>, 2023
 # Krisztián Juhász <juhasz.krisztian@josafar.hu>, 2023
@@ -816,7 +816,7 @@ msgstr "Kedvezmény"
 #: model:ir.actions.act_window,name:loyalty.loyalty_program_discount_loyalty_action
 #: model_terms:ir.ui.view,arch_db:loyalty.loyalty_program_view_form
 msgid "Discount & Loyalty"
-msgstr ""
+msgstr "Kuponok és hűség"
 
 #. module: loyalty
 #: model:ir.model.fields,field_description:loyalty.field_loyalty_reward__discount_applicability
@@ -945,6 +945,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:loyalty.field_loyalty_card__expiration_date
 msgid "Expiration Date"
 msgstr "Lejárat dátuma"
+
+#. module: loyalty
+#. odoo-python
+#: code:addons/loyalty/models/loyalty_card.py:0
+#, python-format
+msgid "Expiration date cannot be set on a loyalty card."
+msgstr ""
 
 #. module: loyalty
 #. odoo-python
@@ -1126,7 +1133,7 @@ msgstr ""
 #. module: loyalty
 #: model:ir.actions.act_window,name:loyalty.loyalty_program_gift_ewallet_action
 msgid "Gift cards & eWallet"
-msgstr ""
+msgstr "Ajándékkártyák & eTárca"
 
 #. module: loyalty
 #: model:ir.model.fields,field_description:loyalty.field_loyalty_generate_wizard__points_granted
@@ -1295,7 +1302,7 @@ msgstr ""
 #. module: loyalty
 #: model:ir.model,name:loyalty.model_loyalty_card
 msgid "Loyalty Coupon"
-msgstr ""
+msgstr "Hűség kupon"
 
 #. module: loyalty
 #: model:ir.model,name:loyalty.model_loyalty_program
@@ -1362,7 +1369,7 @@ msgstr "Minimum mennyiség"
 #. module: loyalty
 #: model:ir.model.fields,field_description:loyalty.field_loyalty_reward__multi_product
 msgid "Multi Product"
-msgstr ""
+msgstr "Több termék"
 
 #. module: loyalty
 #. odoo-python
@@ -1549,7 +1556,7 @@ msgstr ""
 #: code:addons/loyalty/models/loyalty_program.py:0
 #, python-format
 msgid "Promo Code"
-msgstr ""
+msgstr "Promóciós kód"
 
 #. module: loyalty
 #. odoo-python

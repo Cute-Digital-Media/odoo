@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-13 10:28+0000\n"
+"POT-Creation-Date: 2025-02-10 10:34+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
 "Last-Translator: Malaz Abuidris <msea@odoo.com>, 2024\n"
 "Language-Team: Arabic (https://app.transifex.com/odoo/teams/41243/ar/)\n"
@@ -1928,6 +1928,13 @@ msgstr "يقوم بتحويل سلسلة محددة إلى أحرف صغيرة. 
 #, python-format
 msgid "Converts a specified string to uppercase."
 msgstr "يقوم بتحويل سلسلة محددة إلى أحرف كبيرة. "
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+#, python-format
+msgid "Converts a string to a numeric value."
+msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -11680,14 +11687,14 @@ msgstr "الافتراضي: "
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "difference"
-msgstr ""
+msgstr "الفرق "
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/global_filters/components/filter_date_value/filter_date_value.xml:0
 #, python-format
 msgid "empty"
-msgstr ""
+msgstr "فارغ "
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -11710,7 +11717,7 @@ msgstr "خاطئ"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "formula"
-msgstr ""
+msgstr "الصيغة "
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -11800,7 +11807,7 @@ msgstr "لا شيء "
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "number"
-msgstr ""
+msgstr "عدد "
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -11839,7 +11846,7 @@ msgstr "قبل عام "
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "percentage"
-msgstr ""
+msgstr "النسبة "
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -11848,7 +11855,7 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, python-format
 msgid "percentile"
-msgstr ""
+msgstr "النسبة "
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -11903,6 +11910,13 @@ msgstr "يجب أن يكون start_date (%s) في أو قبل end_date (%s). "
 #, python-format
 msgid "text"
 msgstr "نص"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+#, python-format
+msgid "the string to be converted"
+msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript

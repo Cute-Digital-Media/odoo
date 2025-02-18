@@ -150,19 +150,23 @@ class AccountReport(models.Model):
         for report in self.sorted(lambda x: not x.section_report_ids):
             # Reports are sorted in order to first treat the composite reports, in case they need to compute their filters a the same time
             # as their sections
+            is_accessible = self.env['ir.actions.client'].search_count([('context', 'ilike', f"'report_id': {report.id}"), ('tag', '=', 'account_report')])
+            is_variant = bool(report.root_report_id)
+            if (is_accessible or is_variant) and report.section_main_report_ids:
+                continue  # prevent updating the filters of a report when being added as a section of a report
             if report.root_report_id:
                 report[field_name] = report.root_report_id[field_name]
-            elif len(report.section_main_report_ids) == 1 and not self.env['ir.actions.client'].search_count([('context', 'ilike', f"'report_id': {report.id}"), ('tag', '=', 'account_report')]):
+            elif len(report.section_main_report_ids) == 1 and not is_accessible:
                 report[field_name] = report.section_main_report_ids[field_name]
             else:
                 report[field_name] = default_value
 
-    @api.depends('root_report_id')
+    @api.depends('root_report_id', 'country_id')
     def _compute_default_availability_condition(self):
         for report in self:
-            if report.root_report_id:
+            if report.root_report_id and report.country_id:
                 report.availability_condition = 'country'
-            else:
+            elif not report.availability_condition:
                 report.availability_condition = 'always'
 
     @api.depends('section_report_ids')
@@ -191,6 +195,12 @@ class AccountReport(models.Model):
         for record in self:
             if any(section.section_report_ids for section in record.section_report_ids):
                 raise ValidationError(_("The sections defined on a report cannot have sections themselves."))
+
+    @api.constrains('availability_condition', 'country_id')
+    def _validate_availability_condition(self):
+        for record in self:
+            if record.availability_condition == 'country' and not record.country_id:
+                raise ValidationError(_("The Availability is set to 'Country Matches' but the field Country is not set."))
 
     @api.onchange('availability_condition')
     def _onchange_availability_condition(self):

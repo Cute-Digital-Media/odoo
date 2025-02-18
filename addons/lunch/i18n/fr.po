@@ -342,11 +342,11 @@ msgstr ""
 "                </td></tr>\n"
 "                <tr><td valign=\"middle\" align=\"left\" style=\"opacity: 0.7;\">\n"
 "                    <t t-out=\"user.company_id.phone or ''\">+1 650-123-4567</t>\n"
-"                    <t t-if=\"user.company_id.phone and (user.company_id.e-mail or user.company_id.website)\">|</t>\n"
-"                    <t t-if=\"user.company_id.e-mail\">\n"
-"                        <a t-attf-href=\"'mailto:%s' % {{ user.company_id.e-mail }}\" style=\"text-decoration:none; color: #454748;\" t-out=\"user.company_id.e-mail or ''\">info@yourcompany.com</a>\n"
+"                    <t t-if=\"user.company_id.phone and (user.company_id.email or user.company_id.website)\">|</t>\n"
+"                    <t t-if=\"user.company_id.email\">\n"
+"                        <a t-attf-href=\"'mailto:%s' % {{ user.company_id.email }}\" style=\"text-decoration:none; color: #454748;\" t-out=\"user.company_id.email or ''\">info@yourcompany.com</a>\n"
 "                    </t>\n"
-"                    <t t-if=\"user.company_id.e-mail and user.company_id.website\">|</t>\n"
+"                    <t t-if=\"user.company_id.email and user.company_id.website\">|</t>\n"
 "                    <t t-if=\"user.company_id.website\">\n"
 "                        <a t-attf-href=\"'%s' % {{ user.company_id.website }}\" style=\"text-decoration:none; color: #454748;\" t-out=\"user.company_id.website or ''\">http://www.example.com</a>\n"
 "                    </t>\n"
@@ -1498,6 +1498,20 @@ msgid "No cash move yet"
 msgstr "Pas encore de mouvements de trésorerie"
 
 #. module: lunch
+#. odoo-javascript
+#: code:addons/lunch/static/src/views/no_content_helper.xml:0
+#, python-format
+msgid "No location found"
+msgstr "Aucun emplacement trouvé"
+
+#. module: lunch
+#. odoo-javascript
+#: code:addons/lunch/static/src/components/lunch_dashboard.xml:0
+#, python-format
+msgid "No lunch location available."
+msgstr "Aucun emplacement de lunch disponible."
+
+#. module: lunch
 #: model_terms:ir.actions.act_window,help:lunch.lunch_order_action_control_suppliers
 msgid "No lunch order yet"
 msgstr "Pas de commande déjeuner pour l'instant"
@@ -1699,6 +1713,13 @@ msgstr "Pizza margherita"
 #: model:lunch.product,name:lunch.product_vege
 msgid "Pizza Vegetarian"
 msgstr "Pizza végétarienne"
+
+#. module: lunch
+#. odoo-javascript
+#: code:addons/lunch/static/src/views/no_content_helper.xml:0
+#, python-format
+msgid "Please create a location to start ordering."
+msgstr "Veuillez créer un emplacement pour pouvoir commander."
 
 #. module: lunch
 #: model_terms:lunch.alert,message:lunch.alert_office_3

@@ -5,8 +5,8 @@
 # Translators:
 # Manuela Silva <mmsrs@sky.com>, 2023
 # Wil Odoo, 2023
-# Maitê Dietze, 2024
 # NumerSpiral HBG, 2024
+# Maitê Dietze, 2024
 # Peter Lawrence Romão <peterromao@yahoo.co.uk>, 2024
 # 
 msgid ""
@@ -572,7 +572,7 @@ msgstr "Produto"
 #: model:ir.model.fields,field_description:stock_account.field_stock_valuation_layer__categ_id
 #: model_terms:ir.ui.view,arch_db:stock_account.view_inventory_valuation_search
 msgid "Product Category"
-msgstr "Categoria de Artigo"
+msgstr "Categoria do Artigo"
 
 #. module: stock_account
 #: model:ir.model,name:stock_account.model_stock_move_line
@@ -1115,6 +1115,8 @@ msgid ""
 "You don't have any output valuation account defined on your product "
 "category. You must define one before processing this operation."
 msgstr ""
+"Não tem nenhuma conta de valorização de saída definida na sua categoria de "
+"artigo. Deve definir uma antes de processar esta operação."
 
 #. module: stock_account
 #. odoo-python
