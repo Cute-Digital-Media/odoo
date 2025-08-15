@@ -1,0 +1,24 @@
+services:
+  odoo-web:
+    build: .
+    volumes:
+      - ./odoo-web-data:/var/lib/odoo
+      - ./config:/etc/odoo
+      - ./addons:/mnt/extra-addons
+    container_name: odoo-web
+    user: '$UID:$GID'
+    environment:
+      - DB=${POSTGRES_DB}
+      - HOST=${POSTGRES_HOST}
+      - PORT=${POSTGRES_PORT}
+      - USER=${POSTGRES_USER}
+      - PASSWORD=${POSTGRES_PASSWORD}
+      - ODOO_ADMIN_PASSWD=${ODOO_ADMIN_PASSWD}
+    # command: odoo --database=${POSTGRES_DB} --init=base
+    networks:
+      - pronyr_network
+    restart: unless-stopped
+
+networks:
+  pronyr_network:
+    external: true
