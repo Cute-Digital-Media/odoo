@@ -1,0 +1,16 @@
+<odoo>
+    <record id="view_link_tracker_form_thumb" model="ir.ui.view">
+        <field name="name">link.tracker.form.thumb</field>
+        <field name="model">link.tracker</field>
+        <field name="inherit_id" ref="link_tracker.link_tracker_view_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Insert right after the "title" field -->
+            <field name="title" position="after">
+                <field name="extended_description" placeholder="Enter a longer description here..."/>
+                <field name="thumbnail_url"/>
+            </field>
+
+        </field>
+    </record>
+</odoo>
