@@ -1,4 +1,4 @@
 # -*- coding: utf-8 -*-
 
 from . import models
-from . import link_tracker_inherit
+from . import link_tracker
