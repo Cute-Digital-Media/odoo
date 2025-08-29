@@ -1,3 +1,4 @@
 # -*- coding: utf-8 -*-
 
-from . import link_tracker_thumb
+from . import models
+from . import link_tracker_inherit
