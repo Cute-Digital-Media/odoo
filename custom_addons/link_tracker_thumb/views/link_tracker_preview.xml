@@ -1,15 +1,15 @@
 <t t-name="link_tracker_thumb.link_tracker_preview">
     <html>
         <head>
-            <meta property="og:title" content="<t t-esc='title'/>"/>
-            <meta property="og:description" content="<t t-esc='extended_description'/>"/>
-            <meta property="og:image" content="<t t-esc='thumbnail_url'/>"/>
-            <meta property="og:url" content="<t t-esc='url'/>"/>
+            <meta property="og:title" content="&lt;t t-esc='title'/>"/>
+            <meta property="og:description" content="&lt;t t-esc='extended_description'/>"/>
+            <meta property="og:image" content="&lt;t t-esc='thumbnail_url'/>"/>
+            <meta property="og:url" content="&lt;t t-esc='url'/>"/>
 
             <meta name="twitter:card" content="summary_large_image"/>
-            <meta name="twitter:title" content="<t t-esc='title'/>"/>
-            <meta name="twitter:description" content="<t t-esc='extended_description'/>"/>
-            <meta name="twitter:image" content="<t t-esc='thumbnail_url'/>"/>
+            <meta name="twitter:title" content="&lt;t t-esc='title'/>"/>
+            <meta name="twitter:description" content="&lt;t t-esc='extended_description'/>"/>
+            <meta name="twitter:image" content="&lt;t t-esc='thumbnail_url'/>"/>
         </head>
         <body>
             <p>Redirecting to
