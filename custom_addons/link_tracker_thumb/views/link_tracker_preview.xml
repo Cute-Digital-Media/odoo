@@ -1,24 +1,26 @@
-<t t-name="link_tracker_thumb.link_tracker_preview">
-    <head>
-        <meta property="og:title" t-att-content="title"/>
-        <meta property="og:description" t-att-content="extended_description"/>
-        <meta property="og:image" t-att-content="thumbnail_url"/>
-        <meta property="og:url" t-att-content="url"/>
+<odoo>
+    <template id="link_tracker_preview" t-name="link_tracker_thumb.link_tracker_preview">
+        <head>
+            <meta property="og:title" t-att-content="title"/>
+            <meta property="og:description" t-att-content="extended_description"/>
+            <meta property="og:image" t-att-content="thumbnail_url"/>
+            <meta property="og:url" t-att-content="url"/>
 
-        <meta name="twitter:card" content="summary_large_image"/>
-        <meta name="twitter:title" t-att-content="title"/>
-        <meta name="twitter:description" t-att-content="extended_description"/>
-        <meta name="twitter:image" t-att-content="thumbnail_url"/>
-    </head>
-    <body>
-        <p>Redirecting to
-            <a t-att-href="url">
-                <t t-esc="url"/>
-            </a>
-            ...
-        </p>
-        <script type="text/javascript">
-            window.location.href = url;
-        </script>
-    </body>
-</t>
+            <meta name="twitter:card" content="summary_large_image"/>
+            <meta name="twitter:title" t-att-content="title"/>
+            <meta name="twitter:description" t-att-content="extended_description"/>
+            <meta name="twitter:image" t-att-content="thumbnail_url"/>
+        </head>
+        <body>
+            <p>Redirecting to
+                <a t-att-href="url">
+                    <t t-esc="url"/>
+                </a>
+                ...
+            </p>
+            <script type="text/javascript">
+                window.location.href = url;
+            </script>
+        </body>
+    </template>
+</odoo>
