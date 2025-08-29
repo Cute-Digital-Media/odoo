@@ -3,7 +3,7 @@ from odoo import fields, models
 
 class LinkTracker(models.Model):
     _inherit = 'link.tracker'
-
+    code = fields.Char(store=True)
     thumbnail_url = fields.Char(
         string="Thumbnail URL",
         help="Optional thumbnail image for this link"
