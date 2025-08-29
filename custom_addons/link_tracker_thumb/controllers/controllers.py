@@ -7,7 +7,7 @@ _logger = logging.getLogger(__name__)
 
 class LinkTrackerController(http.Controller):
 
-    @http.route('/rt/<string:shortcode>', type='http', auth='public')
+    @http.route('/r/<string:shortcode>', type='http', auth='public')
     def redirect_short_link(self, shortcode, **kwargs):
         _logger.info("Incoming request with shortcode: %s", shortcode)
 
