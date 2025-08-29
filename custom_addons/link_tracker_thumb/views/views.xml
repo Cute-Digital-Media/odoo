@@ -7,7 +7,8 @@
 
             <!-- Insert right after the "title" field -->
             <field name="title" position="after">
-                <field name="extended_description" placeholder="Enter a longer description here..."/>
+                <field name="extended_description"
+                       placeholder="Enter a longer description here..."/>
                 <field name="thumbnail_url"/>
             </field>
 
