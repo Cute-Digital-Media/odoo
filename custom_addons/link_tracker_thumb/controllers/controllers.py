@@ -16,7 +16,7 @@ class LinkTrackerController(http.Controller):
         crawler_signatures = ["facebookexternalhit", "twitterbot", "whatsapp", "telegrambot", "linkedinbot"]
 
         if any(sig in user_agent for sig in crawler_signatures):
-            return request.render("your_module.link_tracker_preview", {
+            return request.render("link_tracker_thumb.link_tracker_preview", {
                 "title": link.title,
                 "extended_description": link.extended_description,
                 "thumbnail_url": link.thumbnail_url,
