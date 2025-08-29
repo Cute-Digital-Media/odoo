@@ -31,8 +31,5 @@ class LinkTrackerController(http.Controller):
                 "url": tracker.url or "",
             })
         else:
-            url = tracker.url
-            if url.startswith('/'):
-                url = request.httprequest.host_url.rstrip('/') + url
-            _logger.info("Redirecting to final URL: %s", url)
-            return request.redirect(url, code=302)
+            _logger.info("Normal user detected, redirecting to: %s", tracker.url)
+            return request.redirect(tracker.url, code=301, local=False)
