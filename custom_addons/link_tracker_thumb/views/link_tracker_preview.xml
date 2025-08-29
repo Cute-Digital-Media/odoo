@@ -1,15 +1,15 @@
 <t t-name="link_tracker_thumb.link_tracker_preview">
     <html>
         <head>
-            <meta property="og:title" content="&lt;t t-esc='title'/>"/>
-            <meta property="og:description" content="&lt;t t-esc='extended_description'/>"/>
-            <meta property="og:image" content="&lt;t t-esc='thumbnail_url'/>"/>
-            <meta property="og:url" content="&lt;t t-esc='url'/>"/>
+            <meta property="og:title" t-att-content="title"/>
+            <meta property="og:description" t-att-content="extended_description"/>
+            <meta property="og:image" t-att-content="thumbnail_url"/>
+            <meta property="og:url" t-att-content="url"/>
 
             <meta name="twitter:card" content="summary_large_image"/>
-            <meta name="twitter:title" content="&lt;t t-esc='title'/>"/>
-            <meta name="twitter:description" content="&lt;t t-esc='extended_description'/>"/>
-            <meta name="twitter:image" content="&lt;t t-esc='thumbnail_url'/>"/>
+            <meta name="twitter:title" t-att-content="title"/>
+            <meta name="twitter:description" t-att-content="extended_description"/>
+            <meta name="twitter:image" t-att-content="thumbnail_url"/>
         </head>
         <body>
             <p>Redirecting to
@@ -17,7 +17,7 @@
                 ...
             </p>
             <script>
-                window.location.href = "&lt;t t-esc='url'/>";
+                window.location.href = url;
             </script>
         </body>
     </html>
