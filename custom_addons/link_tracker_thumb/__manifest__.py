@@ -6,7 +6,7 @@
     'author': 'CuteDigitalMedia',
     'depends': ['link_tracker', 'website'],
     'data': [
-        'views/link_tracker_templates.xml',
+        'views/views.xml',
     ],
     'installable': True,
 }

@@ -1,0 +1,25 @@
+<t t-name="your_module.link_tracker_preview">
+    <html>
+        <head>
+            <meta property="og:title" content="<t t-esc='title'/>"/>
+            <meta property="og:description" content="<t t-esc='description'/>"/>
+            <meta property="og:image" content="<t t-esc='image'/>"/>
+            <meta property="og:url" content="<t t-esc='url'/>"/>
+
+            <meta name="twitter:card" content="summary_large_image"/>
+            <meta name="twitter:title" content="<t t-esc='title'/>"/>
+            <meta name="twitter:description" content="<t t-esc='description'/>"/>
+            <meta name="twitter:image" content="<t t-esc='image'/>"/>
+        </head>
+        <body>
+            <p>Redirecting to
+                <a t-att-href="url">
+                    <t t-esc="url"/>
+                </a>
+                ...
+            </p>
+            <script>window.location.href = "&lt;t t-esc='url'/>";
+            </script>
+        </body>
+    </html>
+</t>
