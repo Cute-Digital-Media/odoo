@@ -1,28 +1,26 @@
 import logging
+
+from odoo.addons.link_tracker.controller import main as linktracker_main
+
 from odoo import http
 from odoo.http import request
 
 _logger = logging.getLogger(__name__)
 
 
-class LinkTrackerController(http.Controller):
+class LinkTrackerController(linktracker_main.LinkTracker):
 
-    @http.route('/rt/<string:shortcode>', type='http', auth='public')
-    def redirect_short_link(self, shortcode, **kwargs):
-        _logger.info("Incoming request with shortcode: %s", shortcode)
+    @http.route('/r/<string:code>', type='http', auth='public', website=True)
+    def full_url_redirect(self, code, **post):
+        _logger.info("Incoming request with shortcode: %s", code)
 
         # Odoo's link.tracker uses field `code` for the short code
-        tracker = request.env['link.tracker'].sudo().search([('code', '=', shortcode)], limit=1)
+        tracker = request.env['link.tracker.code'].sudo().search([('code', '=', code)], limit=1)
         if not tracker:
-            _logger.warning("No tracker found for shortcode: %s", shortcode)
+            _logger.warning("No tracker found for shortcode: %s", code)
             return request.not_found()
 
-        user_agent = request.httprequest.headers.get('User-Agent', '').lower()
-        _logger.info("User-Agent detected: %s", user_agent)
-
-        crawler_signatures = ["facebookexternalhit", "twitterbot", "whatsapp", "telegrambot", "linkedinbot"]
-
-        if any(sig in user_agent for sig in crawler_signatures):
+        if request.env['ir.http'].is_a_bot():
             _logger.info("Crawler detected, serving preview page")
             return request.render("link_tracker_thumb.link_tracker_preview", {
                 "title": tracker.title or "",
@@ -31,5 +29,11 @@ class LinkTrackerController(http.Controller):
                 "url": tracker.url or "",
             })
         else:
-            _logger.info("Normal user detected, redirecting to: %s", tracker.url)
-            return request.redirect(tracker.url, code=301, local=False)
+            _logger.info("Register Click")
+            request.env['link.tracker.click'].sudo().add_click(
+                code,
+                ip=request.httprequest.remote_addr,
+                country_code=request.geoip.country_code,
+            )
+            _logger.info("Normal user detected, redirecting to: %s", tracker.link_id.url)
+            return request.redirect(tracker.link_id.url, code=301, local=False)

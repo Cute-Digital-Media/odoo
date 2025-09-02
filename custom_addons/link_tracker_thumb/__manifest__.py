@@ -4,7 +4,7 @@
     'category': 'Website',
     'summary': 'Adds thumbnail support to Link Tracker',
     'author': 'CuteDigitalMedia',
-    'depends': ['link_tracker', 'website'],
+    'depends': ['link_tracker'],
     'data': [
         'views/views.xml',
         'views/link_tracker_preview.xml',
