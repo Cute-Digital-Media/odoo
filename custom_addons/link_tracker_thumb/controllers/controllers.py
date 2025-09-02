@@ -23,10 +23,10 @@ class LinkTrackerController(linktracker_main.LinkTracker):
         if request.env['ir.http'].is_a_bot():
             _logger.info("Crawler detected, serving preview page")
             return request.render("link_tracker_thumb.link_tracker_preview", {
-                "title": tracker.title or "",
-                "extended_description": tracker.extended_description or "",
-                "thumbnail_url": tracker.thumbnail_url or "",
-                "url": tracker.url or "",
+                "title": tracker.link_id.title or "",
+                "extended_description": tracker.link_id.extended_description or "",
+                "thumbnail_url": tracker.link_id.thumbnail_url or "",
+                "url": tracker.link_id.url or "",
             })
         else:
             _logger.info("Register Click")
