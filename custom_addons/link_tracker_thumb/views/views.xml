@@ -10,8 +10,8 @@
                 <field name="extended_description"
                        placeholder="Enter a longer description here..."/>
                 <field name="thumbnail_url"/>
+                <field name="code"/>
             </field>
-
         </field>
     </record>
 </odoo>

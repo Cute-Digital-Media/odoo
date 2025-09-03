@@ -15,7 +15,7 @@ class LinkTrackerController(linktracker_main.LinkTracker):
         _logger.info("Incoming request with shortcode: %s", code)
 
         # Odoo's link.tracker uses field `code` for the short code
-        tracker = request.env['link.tracker.code'].sudo().search([('code', '=', code)], limit=1)
+        tracker = request.env['link.tracker'].sudo().search([('code', '=', code)], limit=1)
         if not tracker:
             _logger.warning("No tracker found for shortcode: %s", code)
             return request.not_found()
@@ -23,10 +23,10 @@ class LinkTrackerController(linktracker_main.LinkTracker):
         if request.env['ir.http'].is_a_bot():
             _logger.info("Crawler detected, serving preview page")
             return request.render("link_tracker_thumb.link_tracker_preview", {
-                "title": tracker.link_id.title or "",
-                "extended_description": tracker.link_id.extended_description or "",
-                "thumbnail_url": tracker.link_id.thumbnail_url or "",
-                "url": tracker.link_id.url or "",
+                "title": tracker.title or "",
+                "extended_description": tracker.extended_description or "",
+                "thumbnail_url": tracker.thumbnail_url or "",
+                "url": tracker.url or "",
             })
         else:
             _logger.info("Register Click")
@@ -35,5 +35,5 @@ class LinkTrackerController(linktracker_main.LinkTracker):
                 ip=request.httprequest.remote_addr,
                 country_code=request.geoip.country_code,
             )
-            _logger.info("Normal user detected, redirecting to: %s", tracker.link_id.url)
-            return request.redirect(tracker.link_id.url, code=301, local=False)
+            _logger.info("Normal user detected, redirecting to: %s", tracker.url)
+            return request.redirect(tracker.url, code=301, local=False)
