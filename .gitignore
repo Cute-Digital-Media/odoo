@@ -51,3 +51,4 @@ package.json
 /src/
 config/odoo.conf
 /odoo-venv/
+/oca-addons/social/.github/
