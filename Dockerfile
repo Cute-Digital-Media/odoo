@@ -11,4 +11,3 @@ FROM odoo:17.0
 
 # Copy changed files
 COPY --from=builder /tmp/odoo_fork/addons/mass_mailing_themes/ /usr/lib/python3/dist-packages/odoo/addons/mass_mailing_themes/
-COPY --from=builder /tmp/odoo_fork/custom_addons /usr/lib/python3/dist-packages/odoo/
