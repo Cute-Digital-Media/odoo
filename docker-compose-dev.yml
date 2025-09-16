@@ -5,7 +5,6 @@ services:
       - ./odoo-web-data:/var/lib/odoo
       - ./config:/etc/odoo
       - ./custom_addons:/mnt/extra-addons
-      - ./oca_addons:/mnt/oca-addons
     container_name: odoo-web-dev
     environment:
       - DB=${POSTGRES_DB}
