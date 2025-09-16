@@ -4,7 +4,7 @@ services:
     volumes:
       - ./odoo-web-data:/var/lib/odoo
       - ./config:/etc/odoo
-      - ./addons:/mnt/extra-addons
+      - ./custom_addons:/mnt/extra-addons
     container_name: odoo-web
     environment:
       - DB=${POSTGRES_DB}
