@@ -27,6 +27,28 @@ class LinkTracker(models.Model):
         ("link_tracker_code_uniq", "unique(code)", "Code must be unique!"),
     ]
 
+    @api.model
+    def create(self, vals):
+        record = super().create(vals)
+
+        if record.code:
+            tracker_code = self.env['link.tracker.code'].search([('link_id', '=', record.id)], limit=1)
+            if tracker_code:
+                tracker_code.write({'code': record.code})
+
+        return record
+
+    def write(self, vals):
+        res = super().write(vals)
+
+        if "code" in vals:
+            for rec in self:
+                tracker_code = self.env['link.tracker.code'].search([('link_id', '=', rec.id)], limit=1)
+                if tracker_code:
+                    tracker_code.write({'code': rec.code})
+
+        return res
+
     @api.constrains("code")
     def _check_unique_code(self):
         for rec in self:
